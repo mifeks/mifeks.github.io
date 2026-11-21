@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mifekspro — лаунчер и Битва построек</title>
+<meta name="description" content="Портативный лаунчер Minecraft 26.3 и отдельная игра «Битва построек». Без установки: распаковал и играешь.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#0b0c0f; --card:#15171c; --card2:#1b1e25; --line:#262a33;
+    --text:#eef1f6; --dim:#9aa2b1; --accent:#48c774; --accent2:#2f9a55;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:radial-gradient(1200px 600px at 50% -200px,#1a2030 0%,var(--bg) 60%);
+    color:var(--text); font:16px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 80px}
+  header{display:flex;align-items:center;justify-content:space-between;padding:26px 0 10px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.4px}
+  .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(160deg,var(--accent),var(--accent2));
+    display:grid;place-items:center;font-weight:800;color:#08210f}
+  nav a{color:var(--dim);text-decoration:none;margin-left:18px;font-size:14px}
+  nav a:hover{color:var(--text)}
+  h1{font-size:40px;line-height:1.15;margin:34px 0 12px;letter-spacing:-.5px}
+  .lead{color:var(--dim);max-width:660px;margin:0 0 30px;font-size:17px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin:26px 0 40px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+  .card h3{margin:0 0 6px;font-size:19px}
+  .card .size{color:var(--dim);font-size:13px;margin-bottom:14px}
+  .card ul{margin:0 0 18px;padding-left:18px;color:var(--dim);font-size:14.5px}
+  .card li{margin:5px 0}
+  .btn[aria-disabled="true"]{pointer-events:none}
+  .btn{display:block;text-align:center;text-decoration:none;margin-top:auto;padding:13px 18px;border-radius:12px;
+    font-weight:700;color:#08210f;background:linear-gradient(160deg,var(--accent),var(--accent2));
+    box-shadow:0 8px 24px rgba(72,199,116,.18)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+  .btn:hover{filter:brightness(1.07)}
+  h2{font-size:24px;margin:44px 0 14px}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{counter-increment:s;position:relative;padding:14px 0 14px 52px;border-bottom:1px solid var(--line);color:var(--dim)}
+  .steps li:last-child{border-bottom:0}
+  .steps li:before{content:counter(s);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:10px;
+    background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;color:var(--text);font-weight:700}
+  code,.mono{font-family:Consolas,ui-monospace,monospace;font-size:14px;background:var(--card2);
+    border:1px solid var(--line);border-radius:8px;padding:2px 7px;color:#cfe8d8}
+  pre{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto}
+  .note{border-left:3px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--dim);font-size:14.5px}
+  footer{color:#5f6674;font-size:13px;border-top:1px solid var(--line);margin-top:50px;padding-top:22px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand"><div class="logo">M</div> mifekspro</div>
+    <nav>
+      <a href="#download">Скачать</a>
+      <a href="#how">Как играть</a>
+      <a href="#server">Сервер</a>
+    </nav>
+  </header>
+
+  <h1>Лаунчер и «Битва построек»<br>без установки</h1>
+  <p class="lead">
+    Портативная сборка для Minecraft 26.3: Java, игра и моды лежат внутри.
+    Распаковал архив — запустил exe — играешь. Ничего ставить в систему не нужно.
+  </p>
+
+  <h2 id="download">Скачать</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>mifekspro portable</h3>
+      <div class="size">213 МБ · лаунчер + Java 25 + Minecraft 26.3</div>
+      <ul>
+        <li>вкладки: версии, аккаунт, моды, чат, «Битва построек»</li>
+        <li>своя Java внутри, системная не нужна</li>
+        <li>Minecraft 26.3 уже скачан в папку <span class="mono">game</span></li>
+        <li>моды «Битва построек» и Fabric API в <span class="mono">data\mods</span></li>
+      </ul>
+      <a class="btn" data-dl="portable" href="#" aria-disabled="true">Скачать ZIP</a>
+    </div>
+
+    <div class="card">
+      <h3>Просто «Битва построек»</h3>
+      <div class="size">56 МБ · режимы и код, ничего лишнего</div>
+      <ul>
+        <li>только битва: режимы, команда до 20 человек, темы</li>
+        <li>джойн-код <span class="mono">BP-XXXX-XXXX-XXXX</span></li>
+        <li>Java 25 внутри архива</li>
+        <li>для тех, кому нужна только одна игра</li>
+      </ul>
+      <a class="btn" data-dl="standalone" href="#" aria-disabled="true">Скачать ZIP</a>
+    </div>
+
+    <div class="card">
+      <h3>Сервер «Битвы построек»</h3>
+      <div class="size">182 МБ · Fabric 26.3 + мод + Java</div>
+      <ul>
+        <li>комнаты 50×50×65 из бедрока</li>
+        <li>режимы: Классика, Слепая, Без ошибки, Повтори, Загадай</li>
+        <li>запуск в один клик: <span class="mono">ЗАПУСТИТЬ-СЕРВЕР.bat</span></li>
+        <li>порт 25565, оффлайн-ники разрешены</li>
+      </ul>
+      <a class="btn ghost" data-dl="server" href="#" aria-disabled="true">Скачать ZIP</a>
+    </div>
+
+  </div>
+
+  <div class="note" id="dl-note">
+    Ссылки на скачивание появятся сразу после того, как архивы загружены в релизы репозитория
+    (см. <span class="mono">README.md</span> в папке сайта). Пока файлы лежат на флешке <span class="mono">E:\BuildBattle</span>.
+  </div>
+
+  <h2 id="how">Как играть</h2>
+  <ol class="steps">
+    <li>Распакуй архив в любую папку (можно на флешку) — установщиков внутри нет.</li>
+    <li>Для битвы нужен сервер: распакуй серверный архив, запусти <span class="mono">ЗАПУСТИТЬ-СЕРВЕР.bat</span> и дождись строки <span class="mono">Done</span>.</li>
+    <li>Открой лаунчер, вкладка «Битва построек»: выбери режим, сложность и команду, нажми «Создать команду».</li>
+    <li>Появится код вида <span class="mono">BP-XXXX-XXXX-XXXX</span> — отправь его друзьям.</li>
+    <li>Друг вставляет код в поле внизу и жмёт «Присоединиться» — игра запустится и сразу подключится к серверу.</li>
+  </ol>
+
+  <h2 id="server">Сервер и сеть</h2>
+  <p class="lead" style="margin-bottom:18px">
+    Если все компьютеры в одной локальной сети, адрес для друзей — твой локальный IP: порт 25565.
+    Интернет и проброс портов не нужны.
+  </p>
+  <pre>ipconfig          # смотреть строку «IPv4-адрес», например 192.168.1.50
+ОТКРЫТЬ-ПОРТ.bat  # один раз: разрешить порт 25565 в брандмауэре Windows</pre>
+
+  <h2>Команды на сервере</h2>
+  <pre>/bb create classic 300 1 1   создать битву: режим, секунды, раунды, по сколько в команде
+/bb code                     показать код команды
+/bb join                     войти в битву (комнату строит мод)
+/bb start                    начать раунд
+/bb info                     статус и таймер
+/bb stop                     закончить и вернуть всех</pre>
+
+  <footer>
+    mifekspro · сборка для Minecraft 26.3 · сайт статический, без Google-скриптов и внешних API
+  </footer>
+</div>
+
+<script>
+  // Заполни ссылки после загрузки архивов в GitHub Releases (или на Яндекс.Диск).
+  var DOWNLOADS = {
+    portable:   "",  // напр. https://github.com/mifekspro/mifekspro.github.io/releases/download/v1.0/mifekspro-portable.zip
+    standalone: "",
+    server:     ""
+  };
+  document.querySelectorAll("a[data-dl]").forEach(function (a) {
+    var url = DOWNLOADS[a.getAttribute("data-dl")];
+    if (url) { a.href = url; a.removeAttribute("aria-disabled"); a.setAttribute("download", ""); }
+  });
+</script>
+</body>
+</html>
