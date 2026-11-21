@@ -1,24 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 — страница не найдена</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — страница не найдена | MifeksPro</title>
+<meta name="robots" content="noindex">
 <style>
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b0c0f;color:#eef1f6;
-       font:16px/1.55 "Segoe UI",system-ui,Arial,sans-serif}
-  .box{text-align:center;padding:30px}
-  h1{font-size:64px;margin:0;color:#48c774}
-  p{color:#9aa2b1}
-  a{color:#48c774}
+  :root{--bg:#070a0d;--card:#0e1418;--line:#1d262b;--text:#e8eef1;--muted:#8b9aa3;--accent:#2bd4c2;--flare:#ff9a4d}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(1200px 600px at 20% -10%,#12312e 0%,var(--bg) 55%);color:var(--text);font:16px/1.6 "Segoe UI",system-ui,sans-serif;padding:24px}
+  .box{max-width:560px;text-align:center}
+  .code{font-size:96px;font-weight:800;letter-spacing:-.04em;background:linear-gradient(120deg,var(--accent),var(--flare));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+  h1{font-size:24px;margin:8px 0 12px}
+  p{color:var(--muted);margin:0 0 24px}
+  a.btn{display:inline-block;padding:13px 26px;border-radius:12px;background:var(--flare);color:#1a1207;font-weight:700;text-decoration:none}
+  a.link{display:inline-block;margin-left:16px;color:var(--accent);text-decoration:none}
 </style>
 </head>
 <body>
   <div class="box">
-    <h1>404</h1>
-    <p>Такой страницы нет. Возможно, ссылка старая.</p>
-    <p><a href="/">Вернуться на главную</a></p>
+    <p class="code">404</p>
+    <h1>Такой страницы нет</h1>
+    <p>Возможно, ссылка устарела или в адресе опечатка. Вернитесь на главную — там всё, что нужно.</p>
+    <a class="btn" href="/">На главную</a>
+    <a class="link" href="/chat.html">Открыть чат</a>
   </div>
 </body>
 </html>
