@@ -228,11 +228,20 @@ footer a:hover{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+.betabar{position:relative;z-index:55;background:linear-gradient(90deg,#3ecf72,#4fd47f 45%,#2f9e5b);color:#04170c;font-size:.93rem;font-weight:600;line-height:1.35;text-align:center;padding:11px 20px;box-shadow:inset 0 -1px 0 rgba(4,23,12,.18)}
+.betabar b{font-weight:800}
+.betabar a{color:#04170c;text-decoration:none;border-bottom:2px solid rgba(4,23,12,.32);padding-bottom:1px;white-space:nowrap}
+.betabar a:hover{border-bottom-color:#04170c}
+.betabar .bdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#04170c;margin-right:9px;vertical-align:middle;animation:bpulse 1.8s ease-in-out infinite}
+@keyframes bpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.78)}}
+@media (max-width:620px){.betabar{font-size:.86rem;padding:10px 14px}}
 </style>
 </head>
 <body>
 
 <div class="pbar" aria-hidden="true"><i id="pbarFill"></i></div>
+
+<div class="betabar" role="status"><span class="bdot" aria-hidden="true"></span><b>Скоро выходим из беты</b> — релиз MifeksPro планируется в 2027 году. <a href="#changelog">Что осталось закрыть</a></div>
 
 <header>
   <div class="wrap hrow">
