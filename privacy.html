@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности — MifeksPro</title>
+<meta name="description" content="Какие данные собирает лаунчер MifeksPro, сайт mifekspro.website.yandexcloud.net и мобильная версия чата: состав данных, хранение, удаление.">
+<meta name="theme-color" content="#070a0d">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="120x120" href="favicon-120.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+:root{--ink-950:#070a0d;--mist-100:#f2f5f9;--mist-300:#c3ccd8;--mist-500:#8b97a8;--aqua-300:#6ee8d9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--ink-950);color:var(--mist-300);line-height:1.7;padding:48px 20px 80px}
+.wrap{max-width:760px;margin:0 auto}
+a{color:var(--aqua-300);text-decoration:none;border-bottom:1px solid rgba(110,232,217,.35)}
+a:hover{color:#fff}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;color:var(--mist-500);border:none;margin-bottom:28px}
+.back:hover{color:var(--mist-100)}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;color:var(--mist-100);margin-bottom:10px}
+.upd{font-size:.85rem;color:var(--mist-500);margin-bottom:34px}
+h2{font-size:1.15rem;color:var(--mist-100);margin:34px 0 10px}
+p{margin-bottom:12px}
+ul{margin:0 0 12px 22px}
+li{margin-bottom:6px}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px 20px;margin:18px 0}
+.card b{color:var(--mist-100)}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0 12px}
+td,th{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:left;vertical-align:top}
+th{color:var(--mist-100);font-weight:600}
+tr:last-child td{border-bottom:none}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:.85rem}
+.muted{font-size:.88rem;color:var(--mist-500);margin-top:40px;border-top:1px solid rgba(255,255,255,.07);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Вернуться на сайт</a>
+  <h1>Политика конфиденциальности</h1>
+  <p class="upd">Лаунчер MifeksPro 1.6, мобильная версия чата и сайт mifekspro.website.yandexcloud.net · обновлено 6 ноября 2026</p>
+
+  <div class="card">
+    <b>Коротко:</b> настольный лаунчер не собирает персональные данные, пока вы не включите чат. Для чата нужны ник и пароль — других полей нет: почта и телефон не запрашиваются. Всё остальное (настройки, версии, миры) лежит только на вашем компьютере.
+  </div>
+
+  <h2>Настольный лаунчер</h2>
+  <ul>
+    <li>Регистрации, аккаунта и входа по паролю нет — используется оффлайн-ник, который вы вводите сами.</li>
+    <li>Пароль от Minecraft/Microsoft лаунчер не запрашивает и не хранит.</li>
+    <li>Ник, настройки, версии игры, миры и моды хранятся локально, в папке лаунчера на вашем компьютере.</li>
+    <li>Аналитика, трекеры и телеметрия не используются.</li>
+  </ul>
+
+  <h2>Чат в лаунчере и на сайте</h2>
+  <p>Чат — единственная часть проекта, которой нужен аккаунт. При первом входе вы придумываете ник и пароль; больше ничего не спрашивается. По этим данным создаётся запись в <span class="mono">users/&lt;uid&gt;</span> базы Firebase Realtime Database:</p>
+  <table>
+    <tr><th>Что</th><th>Зачем</th></tr>
+    <tr><td>Ник</td><td>Чтобы вас находили по поиску и подписывали сообщения</td></tr>
+    <tr><td>Пароль</td><td>Вход в чат. Хранится не в открытом виде, а хешем в Firebase Authentication</td></tr>
+    <tr><td>Список друзей</td><td>Общий список для лаунчера и сайта — заявки и принятые связи</td></tr>
+    <tr><td>Сообщения</td><td>Общий чат и личные переписки, чтобы их видел собеседник на другом устройстве</td></tr>
+    <tr><td>Дата регистрации и последнего входа</td><td>Показывать, кто давно не заходил, и чистить брошенные ники</td></tr>
+  </table>
+  <p>Почта, телефон, имя и адрес не запрашиваются и не хранятся. Пароль нужен только для чата: к игре, к Mojang и к Microsoft он отношения не имеет.</p>
+
+  <h2>Где хранятся данные и кто имеет доступ</h2>
+  <ul>
+    <li>Аккаунты, друзья и сообщения — в Firebase Realtime Database (серверы Google за пределами Российской Федерации).</li>
+    <li>Сайт и файл лаунчера лежат в Яндекс Облаке (дата-центры в России), у провайдера остаются стандартные журналы обращений: IP-адрес, тип браузера, время запроса.</li>
+    <li>Доступ к базе и почте проекта — только у автора лаунчера.</li>
+    <li>Собственных счётчиков, рекламных трекеров и телеметрии нет ни на сайте, ни в лаунчере.</li>
+  </ul>
+  <div class="card">
+    <b>Важно по 152-ФЗ:</b> персональные данные граждан РФ по закону должны храниться в базах на территории России, а чат работает через Firebase (Google). Если для вас это критично — не регистрируйтесь в чате, остальные функции лаунчера работают без аккаунта. Удаление записи — по первому запросу.</div>
+
+
+  <h2>Сроки хранения и удаление</h2>
+  <p>Запись в чате хранится, пока вы ею пользуетесь. Удаление — по первому запросу: напишите на <a href="mailto:miferpro@vk.com">miferpro@vk.com</a> и укажите свой ник. Аккаунт, друзья и личные сообщения удаляются в течение 7 дней, после этого вход под этим ником перестаёт работать, а ник освобождается.</p>
+
+  <h2>Сетевые запросы лаунчера</h2>
+  <p>Лаунчер обращается в интернет только для того, чтобы игра работала:</p>
+  <ul>
+    <li>загрузка файлов игры и библиотек с официальных серверов Mojang;</li>
+    <li>загрузка выбранных вами модов и ресурспаков с Modrinth;</li>
+    <li>проверка доступности серверов из встроенного списка.</li>
+  </ul>
+
+  <h2>Скачивание файлов</h2>
+  <p>Контрольная сумма SHA256 опубликована рядом с кнопкой скачивания — файл можно проверить на VirusTotal, не запуская его. В лаунчере нет рекламы и встроенных покупок.</p>
+
+  <h2>Дети</h2>
+  <p>В лаунчере и на сайте нет рекламы и покупок. Регистрироваться в чате может только пользователь, достигший возраста, с которого самостоятельно распоряжается своими персональными данными; иначе — с согласия родителя.</p>
+
+  <h2>Изменения</h2>
+  <p>Если в проекте появится что-то новое, что работает с данными, эта страница будет обновлена до выхода такой версии.</p>
+
+  <h2>Связь</h2>
+  <p>Вопросы по данным и приватности: <a href="mailto:miferpro@vk.com">miferpro@vk.com</a>.</p>
+
+  <p class="muted">MifeksPro — авторский проект, не связан с Mojang Studios и Microsoft. Minecraft — торговая марка Mojang AB; права принадлежат правообладателям.</p>
+</div>
+</body>
+</html>
