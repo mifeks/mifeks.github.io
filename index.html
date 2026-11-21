@@ -3,152 +3,288 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mifekspro — лаунчер и Битва построек</title>
-<meta name="description" content="Портативный лаунчер Minecraft 26.3 и отдельная игра «Битва построек». Без установки: распаковал и играешь.">
+<meta name="theme-color" content="#070a0d">
+<title>mifeks — лаунчер и «Битва построек»</title>
+<meta name="description" content="Портативный лаунчер Minecraft 26.3 и отдельная игра «Битва построек». Скачал архив, распаковал, играешь — ничего устанавливать не нужно.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   :root{
-    --bg:#0b0c0f; --card:#15171c; --card2:#1b1e25; --line:#262a33;
-    --text:#eef1f6; --dim:#9aa2b1; --accent:#48c774; --accent2:#2f9a55;
+    --ink:#070a0d; --ink-2:#0a0f14; --card:#0d131a; --card-2:#111925;
+    --line:#1b2530; --line-2:#26323f;
+    --mist:#f2f5f9; --mist-2:#cdd6e0; --dim:#8b97a8;
+    --accent:#2bd4c2; --accent-deep:#1aa08f;
+    --flare:#ff9a4d; --flare-deep:#e07a22;
+    --violet:#a78bfa; --blue:#4d8bff; --green:#48c774;
+    --radius:18px; --wrap:1120px;
   }
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
-    margin:0; background:radial-gradient(1200px 600px at 50% -200px,#1a2030 0%,var(--bg) 60%);
-    color:var(--text); font:16px/1.55 "Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+    margin:0; background:var(--ink); color:var(--mist);
+    font:16px/1.6 "Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+    overflow-x:hidden;
   }
-  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 80px}
-  header{display:flex;align-items:center;justify-content:space-between;padding:26px 0 10px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.4px}
-  .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(160deg,var(--accent),var(--accent2));
-    display:grid;place-items:center;font-weight:800;color:#08210f}
-  nav a{color:var(--dim);text-decoration:none;margin-left:18px;font-size:14px}
-  nav a:hover{color:var(--text)}
-  h1{font-size:40px;line-height:1.15;margin:34px 0 12px;letter-spacing:-.5px}
-  .lead{color:var(--dim);max-width:660px;margin:0 0 30px;font-size:17px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin:26px 0 40px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
-  .card h3{margin:0 0 6px;font-size:19px}
-  .card .size{color:var(--dim);font-size:13px;margin-bottom:14px}
-  .card ul{margin:0 0 18px;padding-left:18px;color:var(--dim);font-size:14.5px}
-  .card li{margin:5px 0}
-  .btn[aria-disabled="true"]{pointer-events:none}
-  .btn{display:block;text-align:center;text-decoration:none;margin-top:auto;padding:13px 18px;border-radius:12px;
-    font-weight:700;color:#08210f;background:linear-gradient(160deg,var(--accent),var(--accent2));
-    box-shadow:0 8px 24px rgba(72,199,116,.18)}
-  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
-  .btn:hover{filter:brightness(1.07)}
-  h2{font-size:24px;margin:44px 0 14px}
-  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
-  .steps li{counter-increment:s;position:relative;padding:14px 0 14px 52px;border-bottom:1px solid var(--line);color:var(--dim)}
-  .steps li:last-child{border-bottom:0}
-  .steps li:before{content:counter(s);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:10px;
-    background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;color:var(--text);font-weight:700}
-  code,.mono{font-family:Consolas,ui-monospace,monospace;font-size:14px;background:var(--card2);
-    border:1px solid var(--line);border-radius:8px;padding:2px 7px;color:#cfe8d8}
-  pre{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto}
-  .note{border-left:3px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0;padding:14px 18px;color:var(--dim);font-size:14.5px}
-  footer{color:#5f6674;font-size:13px;border-top:1px solid var(--line);margin-top:50px;padding-top:22px}
-  a{color:var(--accent)}
+  .pbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:rgba(255,255,255,.05)}
+  .pbar i{display:block;height:100%;width:100%;
+    background:linear-gradient(90deg,#ff4d4d,#ff9a4d,#ffd84d,#48c774,#2bd4c2,#4d8bff,#a78bfa,#ff4d4d);
+    background-size:200% 100%; animation:sweep 8s linear infinite;
+    box-shadow:0 0 14px rgba(43,212,194,.55)}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(7,10,13,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line)}
+  .head{max-width:var(--wrap);margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
+  .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#04211d;
+    background:linear-gradient(150deg,var(--accent),var(--accent-deep));
+    box-shadow:0 10px 26px -10px rgba(43,212,194,.8)}
+  nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  nav a{color:var(--mist-2);text-decoration:none;font-size:14.5px;padding:8px 13px;border-radius:10px;
+    transition:background .18s ease,color .18s ease}
+  nav a:hover{background:rgba(43,212,194,.12);color:var(--accent)}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+
+  .hero{position:relative;overflow:hidden;padding:70px 0 46px}
+  .orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none}
+  .orb-a{width:380px;height:380px;left:-120px;top:-130px;background:rgba(26,160,143,.5);animation:float 9s ease-in-out infinite}
+  .orb-b{width:320px;height:320px;right:-100px;top:40px;background:rgba(255,154,77,.28);animation:float 11s ease-in-out infinite reverse}
+  .orb-c{width:300px;height:300px;left:38%;top:150px;background:rgba(167,139,250,.22);animation:float 13s ease-in-out infinite}
+  .hero-in{position:relative;z-index:1}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,154,77,.42);
+    background:rgba(255,154,77,.12);color:#ffc48c;border-radius:999px;padding:7px 15px;
+    font-size:.8rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--flare);box-shadow:0 0 10px var(--flare)}
+  h1{font-size:clamp(30px,4.4vw,52px);line-height:1.1;margin:20px 0 16px;letter-spacing:-1px;font-weight:900}
+  h1 span{background:linear-gradient(90deg,var(--flare),var(--accent) 32%,var(--violet) 66%,var(--flare));
+    background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:sweep 9s linear infinite}
+  .lead{color:var(--mist-2);max-width:640px;font-size:17.5px;margin:0 0 26px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+    padding:14px 24px;border-radius:13px;font-weight:800;font-size:15.5px;border:1px solid transparent;
+    transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-flare{background:linear-gradient(180deg,var(--flare),var(--flare-deep));color:#251203;
+    box-shadow:0 12px 30px -14px rgba(224,122,34,.95)}
+  .btn-line{background:rgba(43,212,194,.08);border-color:rgba(43,212,194,.4);color:var(--accent)}
+  .btn-line:hover{background:rgba(43,212,194,.16)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:34px 0 0}
+  .stat{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
+    border-radius:14px;padding:16px 18px}
+  .stat b{display:block;font-size:22px;line-height:1.2}
+  .stat span{color:var(--dim);font-size:13px}
+
+  h2{font-size:clamp(22px,2.6vw,30px);margin:56px 0 8px;letter-spacing:-.4px}
+  .sub{color:var(--dim);margin:0 0 24px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .card{position:relative;background:linear-gradient(180deg,var(--card-2),var(--card));
+    border:1px solid var(--line);border-radius:var(--radius);padding:22px;overflow:hidden;
+    display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease}
+  .card:hover{transform:translateY(-3px);border-color:var(--line-2)}
+  .card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--tint,var(--accent));
+    opacity:.9;box-shadow:0 0 18px var(--tint,var(--accent))}
+  .card.teal{--tint:var(--accent)} .card.flare{--tint:var(--flare)} .card.violet{--tint:var(--violet)}
+  .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;
+    background:color-mix(in srgb,var(--tint) 16%,transparent);
+    border:1px solid color-mix(in srgb,var(--tint) 38%,transparent);color:var(--tint);font-size:19px}
+  .card h3{margin:0 0 4px;font-size:19.5px}
+  .size{color:var(--dim);font-size:13px;margin-bottom:14px}
+  .card ul{margin:0 0 20px;padding:0;list-style:none;color:var(--mist-2);font-size:14.5px}
+  .card li{position:relative;padding-left:22px;margin:7px 0}
+  .card li:before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;
+    background:var(--tint);box-shadow:0 0 9px var(--tint);opacity:.9}
+  .card .btn{margin-top:auto;width:100%}
+  .btn-tint{background:color-mix(in srgb,var(--tint) 18%,var(--card));color:var(--mist);
+    border-color:color-mix(in srgb,var(--tint) 55%,transparent)}
+  .btn-tint:hover{background:color-mix(in srgb,var(--tint) 30%,var(--card));
+    box-shadow:0 12px 30px -16px var(--tint)}
+  .soon{opacity:.55;pointer-events:none}
+
+  .note{margin-top:20px;border:1px solid rgba(255,154,77,.3);background:rgba(255,154,77,.08);
+    border-radius:14px;padding:16px 18px;color:#ffdcb8;font-size:14.5px}
+
+  .steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:12px}
+  .steps li{counter-increment:s;position:relative;padding:16px 18px 16px 62px;
+    background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
+    border-radius:14px;color:var(--mist-2)}
+  .steps li:before{content:counter(s);position:absolute;left:16px;top:14px;width:32px;height:32px;
+    border-radius:10px;display:grid;place-items:center;font-weight:900;color:#04211d;
+    background:linear-gradient(150deg,var(--accent),var(--accent-deep))}
+
+  pre{background:#080c11;border:1px solid var(--line);border-radius:14px;padding:16px 18px;overflow:auto;
+    color:#cfe8d8;font:14px/1.7 Consolas,ui-monospace,monospace;margin:14px 0 0}
+  pre .c{color:#5f7286}
+  code{font-family:Consolas,ui-monospace,monospace;background:rgba(43,212,194,.1);color:#9ef0e4;
+    border:1px solid rgba(43,212,194,.25);border-radius:7px;padding:1px 7px;font-size:13.5px}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+  .box{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px}
+  .box h3{margin:0 0 8px;font-size:18px}
+  .box p{color:var(--dim);margin:0 0 10px;font-size:14.5px}
+
+  footer{margin-top:64px;border-top:1px solid var(--line);background:var(--ink-2)}
+  .foot{max-width:var(--wrap);margin:0 auto;padding:26px 22px;display:flex;gap:16px;
+    justify-content:space-between;flex-wrap:wrap;color:#5f7286;font-size:13.5px}
+  .foot a{color:var(--accent);text-decoration:none}
+
+  @keyframes sweep{to{background-position:200% 0}}
+  @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-22px,0)}}
+  @media (max-width:640px){ .hero{padding:44px 0 30px} nav a{padding:7px 10px;font-size:13px} }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="pbar"><i></i></div>
 
-  <header>
-    <div class="brand"><div class="logo">M</div> mifekspro</div>
+<header>
+  <div class="head">
+    <div class="brand"><div class="logo">M</div> mifeks</div>
     <nav>
       <a href="#download">Скачать</a>
       <a href="#how">Как играть</a>
       <a href="#server">Сервер</a>
+      <a href="#faq">Вопросы</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <h1>Лаунчер и «Битва построек»<br>без установки</h1>
-  <p class="lead">
-    Портативная сборка для Minecraft 26.3: Java, игра и моды лежат внутри.
-    Распаковал архив — запустил exe — играешь. Ничего ставить в систему не нужно.
-  </p>
+<section class="hero">
+  <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+  <div class="wrap hero-in">
+    <span class="chip"><span class="dot"></span> Minecraft 26.3 · без установки</span>
+    <h1>Лаунчер и <span>«Битва построек»</span><br>в одном архиве</h1>
+    <p class="lead">Java, игра и моды уже внутри. Распаковал папку — запустил exe — играешь.
+      Ничего не ставится в систему, флешка работает, настройки сохраняются рядом.</p>
+    <div class="hero-actions">
+      <a class="btn btn-flare" href="#download">Скачать архив</a>
+      <a class="btn btn-line" href="#how">Как играть</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>26.3</b><span>версия Minecraft</span></div>
+      <div class="stat"><b>20</b><span>игроков в битве</span></div>
+      <div class="stat"><b>50×50×65</b><span>комната из бедрока</span></div>
+      <div class="stat"><b>5</b><span>режимов игры</span></div>
+    </div>
+  </div>
+</section>
 
-  <h2 id="download">Скачать</h2>
+<main class="wrap">
+  <h2 id="download">Что скачать</h2>
+  <p class="sub">Три архива — выбирай по задаче. Внутри всё нужное: Java, игра, моды.</p>
+
   <div class="grid">
-
-    <div class="card">
-      <h3>mifekspro portable</h3>
+    <div class="card teal">
+      <div class="ico">▣</div>
+      <h3>mifeks portable</h3>
       <div class="size">213 МБ · лаунчер + Java 25 + Minecraft 26.3</div>
       <ul>
         <li>вкладки: версии, аккаунт, моды, чат, «Битва построек»</li>
-        <li>своя Java внутри, системная не нужна</li>
-        <li>Minecraft 26.3 уже скачан в папку <span class="mono">game</span></li>
-        <li>моды «Битва построек» и Fabric API в <span class="mono">data\mods</span></li>
+        <li>своя Java внутри — системная не нужна</li>
+        <li>Minecraft 26.3 уже скачан в папку <code>game</code></li>
+        <li>Fabric + моды в <code>data\mods</code></li>
       </ul>
-      <a class="btn" data-dl="portable" href="#" aria-disabled="true">Скачать ZIP</a>
+      <a class="btn btn-tint" data-dl="portable" href="#" aria-disabled="true">Скачать ZIP</a>
     </div>
 
-    <div class="card">
+    <div class="card flare">
+      <div class="ico">✦</div>
       <h3>Просто «Битва построек»</h3>
-      <div class="size">56 МБ · режимы и код, ничего лишнего</div>
+      <div class="size">56 МБ · только режимы и код</div>
       <ul>
-        <li>только битва: режимы, команда до 20 человек, темы</li>
-        <li>джойн-код <span class="mono">BP-XXXX-XXXX-XXXX</span></li>
+        <li>ничего лишнего: режимы, команда, темы</li>
+        <li>джойн-код <code>BP-XXXX-XXXX-XXXX</code></li>
         <li>Java 25 внутри архива</li>
-        <li>для тех, кому нужна только одна игра</li>
+        <li>для тех, кому нужна одна игра</li>
       </ul>
-      <a class="btn" data-dl="standalone" href="#" aria-disabled="true">Скачать ZIP</a>
+      <a class="btn btn-tint" data-dl="standalone" href="#" aria-disabled="true">Скачать ZIP</a>
     </div>
 
-    <div class="card">
-      <h3>Сервер «Битвы построек»</h3>
+    <div class="card violet">
+      <div class="ico">☁</div>
+      <h3>Сервер битвы</h3>
       <div class="size">182 МБ · Fabric 26.3 + мод + Java</div>
       <ul>
         <li>комнаты 50×50×65 из бедрока</li>
-        <li>режимы: Классика, Слепая, Без ошибки, Повтори, Загадай</li>
-        <li>запуск в один клик: <span class="mono">ЗАПУСТИТЬ-СЕРВЕР.bat</span></li>
+        <li>Классика, Слепая, Без ошибки, Повтори, Загадай</li>
+        <li>запуск одним файлом <code>ЗАПУСТИТЬ-СЕРВЕР.bat</code></li>
         <li>порт 25565, оффлайн-ники разрешены</li>
       </ul>
-      <a class="btn ghost" data-dl="server" href="#" aria-disabled="true">Скачать ZIP</a>
+      <a class="btn btn-tint" data-dl="server" href="#" aria-disabled="true">Скачать ZIP</a>
     </div>
-
   </div>
 
   <div class="note" id="dl-note">
-    Ссылки на скачивание появятся сразу после того, как архивы загружены в релизы репозитория
-    (см. <span class="mono">README.md</span> в папке сайта). Пока файлы лежат на флешке <span class="mono">E:\BuildBattle</span>.
+    Кнопки станут рабочими, как только архивы появятся в Releases репозитория —
+    ссылки вписываются в блок <code>DOWNLOADS</code> внизу страницы.
   </div>
 
   <h2 id="how">Как играть</h2>
+  <p class="sub">Пять шагов, без установщиков и регистраций.</p>
   <ol class="steps">
-    <li>Распакуй архив в любую папку (можно на флешку) — установщиков внутри нет.</li>
-    <li>Для битвы нужен сервер: распакуй серверный архив, запусти <span class="mono">ЗАПУСТИТЬ-СЕРВЕР.bat</span> и дождись строки <span class="mono">Done</span>.</li>
-    <li>Открой лаунчер, вкладка «Битва построек»: выбери режим, сложность и команду, нажми «Создать команду».</li>
-    <li>Появится код вида <span class="mono">BP-XXXX-XXXX-XXXX</span> — отправь его друзьям.</li>
-    <li>Друг вставляет код в поле внизу и жмёт «Присоединиться» — игра запустится и сразу подключится к серверу.</li>
+    <li>Распакуй архив в любую папку — хоть на флешку.</li>
+    <li>Для битвы подними сервер: запусти <code>ЗАПУСТИТЬ-СЕРВЕР.bat</code> и дождись строки <code>Done</code>.</li>
+    <li>Открой лаунчер, вкладка «Битва построек»: режим, сложность, состав команды → «Создать команду».</li>
+    <li>Появится код <code>BP-XXXX-XXXX-XXXX</code> — отправь его друзьям.</li>
+    <li>Друг вставляет код и жмёт «Присоединиться» — игра стартует и сразу коннектится.</li>
   </ol>
 
   <h2 id="server">Сервер и сеть</h2>
-  <p class="lead" style="margin-bottom:18px">
-    Если все компьютеры в одной локальной сети, адрес для друзей — твой локальный IP: порт 25565.
-    Интернет и проброс портов не нужны.
-  </p>
-  <pre>ipconfig          # смотреть строку «IPv4-адрес», например 192.168.1.50
-ОТКРЫТЬ-ПОРТ.bat  # один раз: разрешить порт 25565 в брандмауэре Windows</pre>
+  <div class="two">
+    <div class="box">
+      <h3>Одна локальная сеть</h3>
+      <p>Если все компьютеры дома в одной сети, адрес для друзей — твой локальный IP и порт 25565.
+        Интернет и проброс портов не нужны.</p>
+      <pre><span class="c"># узнать свой адрес</span>
+ipconfig
+<span class="c"># строка «IPv4-адрес», например 192.168.1.50</span>
 
-  <h2>Команды на сервере</h2>
-  <pre>/bb create classic 300 1 1   создать битву: режим, секунды, раунды, по сколько в команде
-/bb code                     показать код команды
-/bb join                     войти в битву (комнату строит мод)
-/bb start                    начать раунд
-/bb info                     статус и таймер
-/bb stop                     закончить и вернуть всех</pre>
+<span class="c"># один раз разрешить порт в брандмауэре</span>
+ОТКРЫТЬ-ПОРТ.bat</pre>
+    </div>
+    <div class="box">
+      <h3>Команды на сервере</h3>
+      <p>Всё делает мод — комнаты, телепорт, таймер, защита стен.</p>
+      <pre>/bb create classic 300 1 1
+/bb code
+/bb join
+/bb start
+/bb info
+/bb stop</pre>
+    </div>
+  </div>
 
-  <footer>
-    mifekspro · сборка для Minecraft 26.3 · сайт статический, без Google-скриптов и внешних API
-  </footer>
-</div>
+  <h2 id="faq">Частые вопросы</h2>
+  <div class="two">
+    <div class="box">
+      <h3>Нужно что-то устанавливать?</h3>
+      <p>Нет. Внутри архива уже лежат Java 25, Minecraft 26.3 и моды. Система остаётся чистой.</p>
+    </div>
+    <div class="box">
+      <h3>Почему сайт без Google?</h3>
+      <p>Отзыв внешних API: только статические файлы. Ничего не отваливается и не блокируется.</p>
+    </div>
+    <div class="box">
+      <h3>Что если Java не нашлась?</h3>
+      <p>Скрипты ищут её рядом с собой, в <code>jdk</code> и в папке лаунчера. Достаточно не разделять файлы архива.</p>
+    </div>
+    <div class="box">
+      <h3>Как обновить мод?</h3>
+      <p>Собери новый jar и положи в <code>data\mods</code> лаунчера и в <code>mods</code> сервера — лаунчер сам скопирует его в игру.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>mifeks · лаунчер и «Битва построек» для Minecraft 26.3</div>
+    <div>сайт статический, <a href="#download">скачать</a> · без Google и внешних API</div>
+  </div>
+</footer>
 
 <script>
-  // Заполни ссылки после загрузки архивов в GitHub Releases (или на Яндекс.Диск).
   var DOWNLOADS = {
-    portable:   "",  // напр. https://github.com/mifekspro/mifekspro.github.io/releases/download/v1.0/mifekspro-portable.zip
+    portable:   "",
     standalone: "",
     server:     ""
   };
