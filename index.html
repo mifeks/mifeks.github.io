@@ -1,297 +1,684 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MifeksPro 1.6 — лаунчер Minecraft для Windows (бета)</title>
+<meta name="description" content="MifeksPro — лаунчер Minecraft для Windows: Forge, Fabric, NeoForge, OptiFine, все версии игры, поиск модов на Modrinth, оффлайн-ник. Версия 1.6, 2,5 МБ, установка не нужна.">
 <meta name="theme-color" content="#070a0d">
-<title>mifeks — лаунчер и «Битва построек»</title>
-<meta name="description" content="Портативный лаунчер Minecraft 26.3 и отдельная игра «Битва построек». Скачал архив, распаковал, играешь — ничего устанавливать не нужно.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://mifekspro.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MifeksPro">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://mifekspro.github.io/">
+<meta property="og:title" content="MifeksPro 1.6 — лаунчер Minecraft для Windows (бета)">
+<meta property="og:description" content="Forge, Fabric, NeoForge, OptiFine, все версии игры и поиск модов на Modrinth — в одном окне. 2,5 МБ, установка не нужна.">
+<meta property="og:image" content="https://mifekspro.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MifeksPro 1.6 — лаунчер Minecraft для Windows (бета)">
+<meta name="twitter:description" content="Forge, Fabric, NeoForge, OptiFine, все версии игры и Modrinth в одном окне. 2,5 МБ, установка не нужна.">
+<meta name="twitter:image" content="https://mifekspro.github.io/og.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MifeksPro","applicationCategory":"GameApplication","operatingSystem":"Windows 10, Windows 11","softwareVersion":"1.6-beta","fileSize":"2.5MB","downloadUrl":"https://mifekspro.github.io/mifekspro.exe","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Лаунчер Minecraft для Windows: Forge, Fabric, NeoForge, OptiFine, все версии игры, поиск модов на Modrinth, оффлайн-ник."}
+</script>
 <style>
-  :root{
-    --ink:#070a0d; --ink-2:#0a0f14; --card:#0d131a; --card-2:#111925;
-    --line:#1b2530; --line-2:#26323f;
-    --mist:#f2f5f9; --mist-2:#cdd6e0; --dim:#8b97a8;
-    --accent:#2bd4c2; --accent-deep:#1aa08f;
-    --flare:#ff9a4d; --flare-deep:#e07a22;
-    --violet:#a78bfa; --blue:#4d8bff; --green:#48c774;
-    --radius:18px; --wrap:1120px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--ink); color:var(--mist);
-    font:16px/1.6 "Segoe UI",system-ui,-apple-system,Arial,sans-serif;
-    overflow-x:hidden;
-  }
-  .pbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:rgba(255,255,255,.05)}
-  .pbar i{display:block;height:100%;width:100%;
-    background:linear-gradient(90deg,#ff4d4d,#ff9a4d,#ffd84d,#48c774,#2bd4c2,#4d8bff,#a78bfa,#ff4d4d);
-    background-size:200% 100%; animation:sweep 8s linear infinite;
-    box-shadow:0 0 14px rgba(43,212,194,.55)}
+:root{
+  --ink:#070a0d;
+  --ink-2:#0a0f14;
+  --card:#0d131a;
+  --card-2:#111925;
+  --line:#1b2530;
+  --line-2:#26323f;
+  --mist:#f2f5f9;
+  --mist-2:#cdd6e0;
+  --dim:#8b97a8;
+  --accent:#2bd4c2;
+  --accent-deep:#1aa08f;
+  --flare-300:#ffb36b;
+  --flare-400:#ff9a4d;
+  --flare-600:#e07a22;
+  --radius:16px;
+  --wrap:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:hidden}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  background:var(--ink);color:var(--mist);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800}
+h3{font-size:1.06rem;font-weight:700}
+.lead{color:var(--mist-2);font-size:1.04rem}
+section{padding:76px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.sec-head{max-width:720px;margin-bottom:36px}
+.sec-head p{color:var(--dim);margin-top:12px}
 
-  header{position:sticky;top:0;z-index:60;background:rgba(7,10,13,.82);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line)}
-  .head{max-width:var(--wrap);margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.3px}
-  .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#04211d;
-    background:linear-gradient(150deg,var(--accent),var(--accent-deep));
-    box-shadow:0 10px 26px -10px rgba(43,212,194,.8)}
-  nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
-  nav a{color:var(--mist-2);text-decoration:none;font-size:14.5px;padding:8px 13px;border-radius:10px;
-    transition:background .18s ease,color .18s ease}
-  nav a:hover{background:rgba(43,212,194,.12);color:var(--accent)}
+/* header */
+.pbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:rgba(255,255,255,.06);pointer-events:none}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff4d4d,#ff9a4d,#ffd84d,#48c774,#2bd4c2,#4d8bff,#a78bfa);box-shadow:0 0 12px rgba(43,212,194,.5);position:relative}
+.pbar i::after{content:"";position:absolute;right:-4px;top:50%;width:9px;height:9px;border-radius:50%;transform:translateY(-50%);background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 16px rgba(255,154,77,.9)}
+header{position:sticky;top:0;z-index:50;background:rgba(7,10,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:18px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;font-size:.95rem}
+.brand img{width:30px;height:30px;border-radius:9px}
+nav.mainnav{position:absolute;top:64px;right:24px;width:272px;display:none;flex-direction:column;align-items:stretch;gap:2px;background:var(--card-2);border:1px solid var(--line-2);border-radius:14px;padding:8px;box-shadow:0 22px 48px rgba(0,0,0,.55);font-size:.94rem;color:var(--mist-2)}
+nav.mainnav.open{display:flex}
+nav.mainnav a{padding:11px 14px;border-radius:10px;transition:background .15s ease,color .15s ease}
+nav.mainnav a:hover{background:rgba(43,212,194,.12);color:var(--accent)}
+.hact{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;font-weight:700;font-size:.92rem;padding:11px 18px;border:1px solid transparent;transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(180deg,var(--flare-400),var(--flare-600));color:#251203;box-shadow:0 10px 26px -12px rgba(224,122,34,.8)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{border-color:var(--line-2);color:var(--mist)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.burger{display:flex;width:42px;height:42px;border-radius:11px;border:1px solid var(--line-2);background:transparent;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;transition:border-color .15s ease,background .15s ease}
+.burger:hover{border-color:var(--accent);background:rgba(43,212,194,.08)}
+.burger span{display:block;width:18px;height:2px;background:var(--mist);border-radius:2px;transition:transform .22s ease,opacity .18s ease}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+/* hero */
+.hero{position:relative;padding:64px 0 72px;overflow:hidden;border-top:0}
+.hero .bg{position:absolute;inset:0;background:url(img/hero-bg.webp) center/cover no-repeat;opacity:.5;animation:kenburns 26s ease-in-out infinite alternate}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,13,.72) 0%,rgba(7,10,13,.9) 55%,var(--ink) 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.orb-a{width:360px;height:360px;left:-110px;top:-120px;background:rgba(26,160,143,.45);animation:float 9s ease-in-out infinite}
+.orb-b{width:300px;height:300px;right:-90px;top:120px;background:rgba(255,154,77,.3);animation:float 11s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(20px,-26px,0) scale(1.08)}}
+@keyframes kenburns{from{transform:scale(1) translateX(0)}to{transform:scale(1.12) translateX(-16px)}}
+@keyframes sweep{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.hero .inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,154,77,.42);background:rgba(255,154,77,.12);color:var(--flare-300);border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:700}
+.hero h1{font-size:clamp(2rem,4.6vw,3.4rem);font-weight:800;margin:18px 0 16px}
+.hero h1 span{background:linear-gradient(90deg,var(--flare-400),var(--accent) 35%,#a78bfa 70%,var(--flare-400));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sweep 9s linear infinite}
+.hero .lead{max-width:520px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 22px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.82rem;color:var(--dim)}
+.meta b{color:var(--mist-2);font-weight:600}
+.shot-frame{border:1px solid var(--line-2);border-radius:18px;overflow:hidden;background:var(--card);box-shadow:0 26px 60px rgba(0,0,0,.55)}
+.shot-frame img{width:100%;height:auto}
 
-  .hero{position:relative;overflow:hidden;padding:70px 0 46px}
-  .orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none}
-  .orb-a{width:380px;height:380px;left:-120px;top:-130px;background:rgba(26,160,143,.5);animation:float 9s ease-in-out infinite}
-  .orb-b{width:320px;height:320px;right:-100px;top:40px;background:rgba(255,154,77,.28);animation:float 11s ease-in-out infinite reverse}
-  .orb-c{width:300px;height:300px;left:38%;top:150px;background:rgba(167,139,250,.22);animation:float 13s ease-in-out infinite}
-  .hero-in{position:relative;z-index:1}
-  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,154,77,.42);
-    background:rgba(255,154,77,.12);color:#ffc48c;border-radius:999px;padding:7px 15px;
-    font-size:.8rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--flare);box-shadow:0 0 10px var(--flare)}
-  h1{font-size:clamp(30px,4.4vw,52px);line-height:1.1;margin:20px 0 16px;letter-spacing:-1px;font-weight:900}
-  h1 span{background:linear-gradient(90deg,var(--flare),var(--accent) 32%,var(--violet) 66%,var(--flare));
-    background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:sweep 9s linear infinite}
-  .lead{color:var(--mist-2);max-width:640px;font-size:17.5px;margin:0 0 26px}
-  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
-    padding:14px 24px;border-radius:13px;font-weight:800;font-size:15.5px;border:1px solid transparent;
-    transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-flare{background:linear-gradient(180deg,var(--flare),var(--flare-deep));color:#251203;
-    box-shadow:0 12px 30px -14px rgba(224,122,34,.95)}
-  .btn-line{background:rgba(43,212,194,.08);border-color:rgba(43,212,194,.4);color:var(--accent)}
-  .btn-line:hover{background:rgba(43,212,194,.16)}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1.2}
+.stat span{font-size:.86rem;color:var(--dim)}
 
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:34px 0 0}
-  .stat{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
-    border-radius:14px;padding:16px 18px}
-  .stat b{display:block;font-size:22px;line-height:1.2}
-  .stat span{color:var(--dim);font-size:13px}
+/* cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card p{color:var(--dim);font-size:.92rem;margin-top:8px}
+.ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(43,212,194,.12);border:1px solid rgba(43,212,194,.28);color:var(--accent);margin-bottom:14px}
+.ico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
-  h2{font-size:clamp(22px,2.6vw,30px);margin:56px 0 8px;letter-spacing:-.4px}
-  .sub{color:var(--dim);margin:0 0 24px}
+/* screenshots */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.shot{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.shot img{width:100%;height:auto}
+.shot figcaption{padding:12px 16px;font-size:.86rem;color:var(--dim);border-top:1px solid var(--line)}
+.shot figcaption b{color:var(--mist);font-weight:600}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-  .card{position:relative;background:linear-gradient(180deg,var(--card-2),var(--card));
-    border:1px solid var(--line);border-radius:var(--radius);padding:22px;overflow:hidden;
-    display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease}
-  .card:hover{transform:translateY(-3px);border-color:var(--line-2)}
-  .card:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--tint,var(--accent));
-    opacity:.9;box-shadow:0 0 18px var(--tint,var(--accent))}
-  .card.teal{--tint:var(--accent)} .card.flare{--tint:var(--flare)} .card.violet{--tint:var(--violet)}
-  .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;
-    background:color-mix(in srgb,var(--tint) 16%,transparent);
-    border:1px solid color-mix(in srgb,var(--tint) 38%,transparent);color:var(--tint);font-size:19px}
-  .card h3{margin:0 0 4px;font-size:19.5px}
-  .size{color:var(--dim);font-size:13px;margin-bottom:14px}
-  .card ul{margin:0 0 20px;padding:0;list-style:none;color:var(--mist-2);font-size:14.5px}
-  .card li{position:relative;padding-left:22px;margin:7px 0}
-  .card li:before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;
-    background:var(--tint);box-shadow:0 0 9px var(--tint);opacity:.9}
-  .card .btn{margin-top:auto;width:100%}
-  .btn-tint{background:color-mix(in srgb,var(--tint) 18%,var(--card));color:var(--mist);
-    border-color:color-mix(in srgb,var(--tint) 55%,transparent)}
-  .btn-tint:hover{background:color-mix(in srgb,var(--tint) 30%,var(--card));
-    box-shadow:0 12px 30px -16px var(--tint)}
-  .soon{opacity:.55;pointer-events:none}
+/* video */
+.vlayout{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}
+.vframe{border:1px solid var(--line-2);border-radius:18px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.vframe video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.vside{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.vside .vert{width:100%;max-width:220px;border-radius:12px;border:1px solid var(--line-2);margin:0 auto 14px}
+.vside p{color:var(--dim);font-size:.88rem;margin-bottom:14px}
 
-  .note{margin-top:20px;border:1px solid rgba(255,154,77,.3);background:rgba(255,154,77,.08);
-    border-radius:14px;padding:16px 18px;color:#ffdcb8;font-size:14.5px}
+/* versions */
+.vsplit{display:grid;grid-template-columns:1fr 1.1fr;gap:18px}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.vpick{font-size:2.6rem;font-weight:800;line-height:1;margin:4px 0 6px}
+.vrow{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:.9rem}
+.vrow span{color:var(--dim)}
+.srv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:16px}
+.srv div{display:flex;justify-content:space-between;gap:10px;font-size:.86rem;padding:7px 0;border-bottom:1px solid var(--line)}
+.srv span{color:var(--dim);font-family:Consolas,monospace;font-size:.8rem}
+.tag{display:inline-block;border:1px solid var(--line-2);border-radius:999px;padding:2px 10px;font-size:.74rem;color:var(--dim)}
 
-  .steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:12px}
-  .steps li{counter-increment:s;position:relative;padding:16px 18px 16px 62px;
-    background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
-    border-radius:14px;color:var(--mist-2)}
-  .steps li:before{content:counter(s);position:absolute;left:16px;top:14px;width:32px;height:32px;
-    border-radius:10px;display:grid;place-items:center;font-weight:900;color:#04211d;
-    background:linear-gradient(150deg,var(--accent),var(--accent-deep))}
+/* steps */
+.steps{counter-reset:s;display:grid;gap:12px}
+.step{display:grid;grid-template-columns:44px 1fr;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.step::before{counter-increment:s;content:counter(s);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(43,212,194,.13);color:var(--accent);font-weight:800}
+.step b{display:block;font-size:.98rem}
+.step p{color:var(--dim);font-size:.9rem;margin-top:2px}
 
-  pre{background:#080c11;border:1px solid var(--line);border-radius:14px;padding:16px 18px;overflow:auto;
-    color:#cfe8d8;font:14px/1.7 Consolas,ui-monospace,monospace;margin:14px 0 0}
-  pre .c{color:#5f7286}
-  code{font-family:Consolas,ui-monospace,monospace;background:rgba(43,212,194,.1);color:#9ef0e4;
-    border:1px solid rgba(43,212,194,.25);border-radius:7px;padding:1px 7px;font-size:13.5px}
-  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
-  .box{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);
-    border-radius:var(--radius);padding:22px}
-  .box h3{margin:0 0 8px;font-size:18px}
-  .box p{color:var(--dim);margin:0 0 10px;font-size:14.5px}
+/* list */
+.news{display:grid;gap:12px}
+.news-item{display:grid;grid-template-columns:8px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.news-item .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:9px}
+.news-item b{font-size:.98rem}
+.news-item p{color:var(--dim);font-size:.9rem;margin-top:2px}
 
-  footer{margin-top:64px;border-top:1px solid var(--line);background:var(--ink-2)}
-  .foot{max-width:var(--wrap);margin:0 auto;padding:26px 22px;display:flex;gap:16px;
-    justify-content:space-between;flex-wrap:wrap;color:#5f7286;font-size:13.5px}
-  .foot a{color:var(--accent);text-decoration:none}
+/* honesty table */
+.table{width:100%;border-collapse:collapse;font-size:.9rem}
+.table th,.table td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+.table th{color:var(--dim);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.table td:first-child{color:var(--mist-2)}
+.table tr:last-child td{border-bottom:0}
+.checks{display:grid;gap:12px}
+.check{display:grid;grid-template-columns:22px 1fr;gap:12px;font-size:.92rem}
+.check .ok{color:var(--accent);font-weight:800}
+.check p{color:var(--dim);font-size:.88rem}
+.mono{font-family:Consolas,monospace;font-size:.78rem;word-break:break-all;color:var(--mist-2)}
 
-  @keyframes sweep{to{background-position:200% 0}}
-  @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-22px,0)}}
-  @media (max-width:640px){ .hero{padding:44px 0 30px} nav a{padding:7px 10px;font-size:13px} }
+/* faq */
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;margin-bottom:10px}
+details summary{cursor:pointer;list-style:none;padding:16px 20px;font-weight:600;display:flex;justify-content:space-between;gap:16px;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--accent);font-weight:700;font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{padding:0 20px 18px;color:var(--dim);font-size:.92rem}
+
+/* download */
+.dl{background:linear-gradient(160deg,rgba(43,212,194,.1),rgba(13,19,26,.6) 55%);border:1px solid rgba(43,212,194,.3);border-radius:22px;padding:36px}
+.dl h2{margin-bottom:10px}
+.dl .lead{max-width:620px;color:var(--mist-2)}
+.dl .actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 18px}
+.dl .mono{margin-top:6px}
+.note{font-size:.84rem;color:var(--dim);margin-top:14px}
+.archive{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.archive table{width:100%;border-collapse:collapse;font-size:.86rem}
+.archive td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--dim)}
+.archive td:first-child{color:var(--mist-2)}
+.archive a{color:var(--accent)}
+.warn{border:1px solid rgba(255,154,77,.34);background:rgba(255,154,77,.08);color:#ffca9e;border-radius:12px;padding:12px 16px;font-size:.86rem;margin-top:18px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:44px 0 34px;font-size:.88rem;color:var(--dim)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+footer h4{color:var(--mist);font-size:.86rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+footer a:hover{color:var(--accent)}
+.flinks{display:grid;gap:8px}
+.copy{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem}
+
+@media (max-width:900px){
+  .hero .inner{grid-template-columns:1fr;gap:30px}
+  .grid-3,.shots,.stats{grid-template-columns:repeat(2,1fr)}
+  .vsplit,.fgrid{grid-template-columns:1fr}
+  .vlayout{grid-template-columns:1fr}
+  .dl{padding:26px}
+}
+@media (max-width:720px){
+  section{padding:56px 0}
+  nav.mainnav{top:68px;left:12px;right:12px;width:auto}
+  .hact .btn-ghost{display:none}
+  .grid-3,.shots,.stats,.grid-2,.srv{grid-template-columns:1fr}
+  .dl{padding:22px}
+  .hrow{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
-<div class="pbar"><i></i></div>
+
+<div class="pbar" aria-hidden="true"><i id="pbarFill"></i></div>
 
 <header>
-  <div class="head">
-    <div class="brand"><div class="logo">M</div> mifeks</div>
-    <nav>
-      <a href="#download">Скачать</a>
-      <a href="#how">Как играть</a>
-      <a href="#server">Сервер</a>
+  <div class="wrap hrow">
+    <a href="#top" class="brand"><img src="img/logo.png" alt="Логотип MifeksPro" width="30" height="30">MIFEKSPRO</a>
+    <nav class="mainnav" id="nav" aria-label="Разделы страницы">
+      <a href="#features">Возможности</a>
+      <a href="#screens">Скриншоты</a>
+      <a href="#versions">Версии</a>
+      <a href="#install">Установка</a>
       <a href="#faq">Вопросы</a>
     </nav>
+    <div class="hact">
+      <a href="account.html" class="btn btn-ghost">Аккаунт</a>
+      <a href="#download" class="btn btn-primary">Скачать</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
+<main id="top">
+
 <section class="hero">
-  <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
-  <div class="wrap hero-in">
-    <span class="chip"><span class="dot"></span> Minecraft 26.3 · без установки</span>
-    <h1>Лаунчер и <span>«Битва построек»</span><br>в одном архиве</h1>
-    <p class="lead">Java, игра и моды уже внутри. Распаковал папку — запустил exe — играешь.
-      Ничего не ставится в систему, флешка работает, настройки сохраняются рядом.</p>
-    <div class="hero-actions">
-      <a class="btn btn-flare" href="#download">Скачать архив</a>
-      <a class="btn btn-line" href="#how">Как играть</a>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div>
+      <span class="chip">Версия 1.6 · бета · Windows</span>
+      <h1>Лаунчер Minecraft <span>без лишних шагов</span></h1>
+      <p class="lead">Forge, Fabric, NeoForge, OptiFine, все релизы и снапшоты, поиск модов на Modrinth и оффлайн-ник — в одном окне. Установка не нужна: скачали файл и играете.</p>
+      <div class="actions">
+        <a href="#download" class="btn btn-primary">Скачать для Windows · 2,5 МБ</a>
+        <a href="#install" class="btn btn-ghost">Как установить</a>
+      </div>
+      <div class="meta">
+        <span>mifekspro.exe · <b>2 638 848 байт</b></span>
+        <span>SHA256: <b class="mono">75a3b8cd…af4307</b></span>
+        <span>обновлено 6 ноября 2026</span>
+      </div>
     </div>
-    <div class="stats">
-      <div class="stat"><b>26.3</b><span>версия Minecraft</span></div>
-      <div class="stat"><b>20</b><span>игроков в битве</span></div>
-      <div class="stat"><b>50×50×65</b><span>комната из бедрока</span></div>
-      <div class="stat"><b>5</b><span>режимов игры</span></div>
+    <div class="shot-frame">
+      <img src="img/screen-main.webp" alt="Главный экран лаунчера MifeksPro: выбранная версия 1.16.5 и список серверов" width="1120" height="664">
     </div>
   </div>
 </section>
 
-<main class="wrap">
-  <h2 id="download">Что скачать</h2>
-  <p class="sub">Три архива — выбирай по задаче. Внутри всё нужное: Java, игра, моды.</p>
-
-  <div class="grid">
-    <div class="card teal">
-      <div class="ico">▣</div>
-      <h3>mifeks portable</h3>
-      <div class="size">213 МБ · лаунчер + Java 25 + Minecraft 26.3</div>
-      <ul>
-        <li>вкладки: версии, аккаунт, моды, чат, «Битва построек»</li>
-        <li>своя Java внутри — системная не нужна</li>
-        <li>Minecraft 26.3 уже скачан в папку <code>game</code></li>
-        <li>Fabric + моды в <code>data\mods</code></li>
-      </ul>
-      <a class="btn btn-tint" data-dl="portable" href="#" aria-disabled="true">Скачать ZIP</a>
+<section id="features" style="border-top:0;padding-top:0">
+  <div class="wrap">
+    <div class="stats" style="margin-bottom:56px">
+      <div class="stat"><b>4</b><span>загрузчика: Forge, Fabric, NeoForge, OptiFine</span></div>
+      <div class="stat"><b>103</b><span>версии игры из официального списка</span></div>
+      <div class="stat"><b>12</b><span>популярных серверов с адресами</span></div>
+      <div class="stat"><b>2,5</b><span>МБ — размер файла, установка не нужна</span></div>
     </div>
-
-    <div class="card flare">
-      <div class="ico">✦</div>
-      <h3>Просто «Битва построек»</h3>
-      <div class="size">56 МБ · только режимы и код</div>
-      <ul>
-        <li>ничего лишнего: режимы, команда, темы</li>
-        <li>джойн-код <code>BP-XXXX-XXXX-XXXX</code></li>
-        <li>Java 25 внутри архива</li>
-        <li>для тех, кому нужна одна игра</li>
-      </ul>
-      <a class="btn btn-tint" data-dl="standalone" href="#" aria-disabled="true">Скачать ZIP</a>
+    <div class="sec-head">
+      <div class="eyebrow">Возможности</div>
+      <h2>Что внутри лаунчера</h2>
+      <p>MifeksPro 1.6 — авторский лаунчер для Windows. Всё, что нужно для запуска игры, уже в одном окне.</p>
     </div>
-
-    <div class="card violet">
-      <div class="ico">☁</div>
-      <h3>Сервер битвы</h3>
-      <div class="size">182 МБ · Fabric 26.3 + мод + Java</div>
-      <ul>
-        <li>комнаты 50×50×65 из бедрока</li>
-        <li>Классика, Слепая, Без ошибки, Повтори, Загадай</li>
-        <li>запуск одним файлом <code>ЗАПУСТИТЬ-СЕРВЕР.bat</code></li>
-        <li>порт 25565, оффлайн-ники разрешены</li>
-      </ul>
-      <a class="btn btn-tint" data-dl="server" href="#" aria-disabled="true">Скачать ZIP</a>
-    </div>
-  </div>
-
-  <div class="note" id="dl-note">
-    Кнопки станут рабочими, как только архивы появятся в Releases репозитория —
-    ссылки вписываются в блок <code>DOWNLOADS</code> внизу страницы.
-  </div>
-
-  <h2 id="how">Как играть</h2>
-  <p class="sub">Пять шагов, без установщиков и регистраций.</p>
-  <ol class="steps">
-    <li>Распакуй архив в любую папку — хоть на флешку.</li>
-    <li>Для битвы подними сервер: запусти <code>ЗАПУСТИТЬ-СЕРВЕР.bat</code> и дождись строки <code>Done</code>.</li>
-    <li>Открой лаунчер, вкладка «Битва построек»: режим, сложность, состав команды → «Создать команду».</li>
-    <li>Появится код <code>BP-XXXX-XXXX-XXXX</code> — отправь его друзьям.</li>
-    <li>Друг вставляет код и жмёт «Присоединиться» — игра стартует и сразу коннектится.</li>
-  </ol>
-
-  <h2 id="server">Сервер и сеть</h2>
-  <div class="two">
-    <div class="box">
-      <h3>Одна локальная сеть</h3>
-      <p>Если все компьютеры дома в одной сети, адрес для друзей — твой локальный IP и порт 25565.
-        Интернет и проброс портов не нужны.</p>
-      <pre><span class="c"># узнать свой адрес</span>
-ipconfig
-<span class="c"># строка «IPv4-адрес», например 192.168.1.50</span>
-
-<span class="c"># один раз разрешить порт в брандмауэре</span>
-ОТКРЫТЬ-ПОРТ.bat</pre>
-    </div>
-    <div class="box">
-      <h3>Команды на сервере</h3>
-      <p>Всё делает мод — комнаты, телепорт, таймер, защита стен.</p>
-      <pre>/bb create classic 300 1 1
-/bb code
-/bb join
-/bb start
-/bb info
-/bb stop</pre>
+    <div class="grid-3">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+        <h3>Готовые сборки</h3>
+        <p>Сборки уже внутри лаунчера — выбираете нужную и запускаете.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></div>
+        <h3>Все версии</h3>
+        <p>Переключайте версии прямо в окне — одна программа вместо десятка.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+        <h3>Настройки</h3>
+        <p>Память, Java, пути и оформление — в одном месте, без правки конфигов.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5.3 5.6.7-4.1 3.9 1 5.6-4.9-2.7-4.9 2.7 1-5.6L4 9l5.6-.7z"/></svg></div>
+        <h3>Встроенный мод</h3>
+        <p>Мод уже входит в лаунчер — отдельно скачивать и устанавливать не нужно.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></div>
+        <h3>Modrinth</h3>
+        <p>Моды, ресурспаки и шейдеры ищутся в окне лаунчера под выбранную версию.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4l7 16 3-6 6-3z"/></svg></div>
+        <h3>Без лишнего</h3>
+        <p>Никаких навязчивых экранов и вторых программ — только запуск игры.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <h2 id="faq">Частые вопросы</h2>
-  <div class="two">
-    <div class="box">
-      <h3>Нужно что-то устанавливать?</h3>
-      <p>Нет. Внутри архива уже лежат Java 25, Minecraft 26.3 и моды. Система остаётся чистой.</p>
+<section id="screens">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Скриншоты</div>
+      <h2>Как выглядит лаунчер</h2>
+      <p>Главный экран, настройки и поиск модов — всё в одном окне, без вкладок браузера.</p>
     </div>
-    <div class="box">
-      <h3>Почему сайт без Google?</h3>
-      <p>Отзыв внешних API: только статические файлы. Ничего не отваливается и не блокируется.</p>
-    </div>
-    <div class="box">
-      <h3>Что если Java не нашлась?</h3>
-      <p>Скрипты ищут её рядом с собой, в <code>jdk</code> и в папке лаунчера. Достаточно не разделять файлы архива.</p>
-    </div>
-    <div class="box">
-      <h3>Как обновить мод?</h3>
-      <p>Собери новый jar и положи в <code>data\mods</code> лаунчера и в <code>mods</code> сервера — лаунчер сам скопирует его в игру.</p>
+    <div class="shots">
+      <figure class="shot">
+        <img src="img/screen-main.webp" alt="Главный экран: выбранная версия, память и список серверов" width="1120" height="664">
+        <figcaption><b>Главный экран</b> — версия, память и серверы</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/screen-settings.webp" alt="Настройки: разделы памяти, Java и путей, оформления и интерфейса" width="1120" height="664">
+        <figcaption><b>Настройки</b> — четыре раздела в одной карточке</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/screen-modrinth.webp" alt="Экран Modrinth в лаунчере: поиск модов, сборок, ресурспаков и шейдеров" width="1120" height="664">
+        <figcaption><b>Modrinth</b> — моды и ресурспаки внутри</figcaption>
+      </figure>
     </div>
   </div>
+</section>
+
+<section id="video">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Видео</div>
+      <h2>Лаунчер за 15 секунд</h2>
+      <p>Запись настоящего экрана: открытие Modrinth со списком модов и разделы настроек. Без ускорений и монтажных склеек интерфейса.</p>
+    </div>
+    <div class="vlayout">
+      <div class="vframe">
+        <video controls preload="none" playsinline poster="img/video-poster.webp">
+          <source src="video/mifekspro-reels-1080p.mp4" type="video/mp4">
+          Ваш браузер не воспроизводит видео — <a href="video/mifekspro-reels-1080p.mp4">скачать файл</a>.
+        </video>
+      </div>
+      <div class="vside">
+        <img class="vert" src="img/video-poster-vertical.webp" alt="Вертикальная версия ролика 1080×1920" width="540" height="960">
+        <h3>Вертикальная версия</h3>
+        <p>Тот же ролик 1080×1920 для Shorts, VK Клипов и TikTok — 14,8 секунды, около 1 МБ.</p>
+        <a class="btn btn-ghost" href="video/mifekspro-shorts-1080x1920.mp4" download>Скачать 1080×1920</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="versions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Версии и серверы</div>
+      <h2>Forge, Fabric, NeoForge, OptiFine — в одном списке</h2>
+      <p>Версия и загрузчик выбираются в два клика. Популярные серверы собраны отдельным списком с готовыми адресами.</p>
+    </div>
+    <div class="vsplit">
+      <div class="vcard">
+        <span class="tag">Выбранная версия</span>
+        <div class="vpick">1.16.5</div>
+        <div class="vrow"><span>Версии</span><b>103</b></div>
+        <div class="vrow"><span>Статус</span><b>версия установлена</b></div>
+        <div class="vrow"><span>Память</span><b>3072 МБ · рекомендация 3072</b></div>
+        <div class="vrow"><span>Аккаунт</span><b>оффлайн-ник</b></div>
+        <p class="note">Полный список версий открывается в окне лаунчера — там же выбирается сборка и настраивается запуск.</p>
+      </div>
+      <div class="vcard">
+        <span class="tag">Популярные серверы · 12</span>
+        <div class="srv">
+          <div>Mineland <span>play.mineland.net</span></div>
+          <div>SkyBars <span>play.skybars.me</span></div>
+          <div>FunTime <span>mc.funtime.su</span></div>
+          <div>MineBlaze <span>mc.mineblaze.net</span></div>
+          <div>DexLand <span>mc.dexland.org</span></div>
+          <div>MasedWorld <span>mc.masedworld.net</span></div>
+          <div>JustMC <span>play.justmc.ru</span></div>
+          <div>MegaCraft <span>mc.megacraft.org</span></div>
+          <div>AppleCraft <span>applecraft.online</span></div>
+          <div>PolitMaster <span>politmaster.ru</span></div>
+          <div>Freedom <span>go.fdm.su</span></div>
+          <div>PlayMine <span>playmc.me</span></div>
+        </div>
+        <p class="note">Адрес копируется одной кнопкой — подключение занимает пару секунд.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Установка</div>
+      <h2>Как установить за минуту</h2>
+      <p>Установщика нет: лаунчер — один файл. Пять шагов от скачивания до игры.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div><b>Скачайте mifekspro.exe</b><p>Кнопка на этой странице или зеркало в блоке загрузки.</p></div></div>
+      <div class="step"><div><b>Проверьте файл</b><p>Сверьте SHA256 с указанным на странице или откройте файл на VirusTotal.</p></div></div>
+      <div class="step"><div><b>Запустите</b><p>Если Windows покажет SmartScreen — «Подробнее» → «Выполнить в любом случае». Файл не подписан сертификатом, подробнее в разделе «Честно о файле».</p></div></div>
+      <div class="step"><div><b>Выберите версию и загрузчик</b><p>Версия и ОЗУ выставляются в лаунчере, библиотеки скачиваются автоматически.</p></div></div>
+      <div class="step"><div><b>Введите ник и нажмите «Играть»</b><p>Оффлайн-ник сохраняется в списке — в следующий раз просто выбираете его.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="changelog">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Что нового</div>
+      <h2>Версия 1.6</h2>
+      <p>Крупное обновление: светлая тема, очистка списка серверов и переработанные настройки.</p>
+    </div>
+    <div class="news">
+      <div class="news-item"><div class="dot"></div><div><b>Светлая тема · экспериментально</b><p>Переключатель в настройках: светлый интерфейс, контрастный текст и светлые поля ввода. Тема помечена как экспериментальная — возможны кривые отступы, это ожидаемо.</p></div></div>
+      <div class="news-item"><div class="dot"></div><div><b>Список серверов</b><p>Кнопка «Убрать» очищает список популярных серверов одним нажатием, если они не нужны.</p></div></div>
+      <div class="news-item"><div class="dot"></div><div><b>Настройки</b><p>Выделение памяти и ползунки собраны в одну карточку с разделами — без ввода чисел вручную.</p></div></div>
+      <div class="news-item"><div class="dot"></div><div><b>Запуск игры</b><p>Оптимизация работает на всех версиях: под каждую подбирается своя Java (8, 17 или 21) и флаги G1GC — меньше фризов, стабильнее FPS.</p></div></div>
+      <div class="news-item"><div class="dot"></div><div><b>Защита от потери прогресса</b><p>Если закрыть лаунчер во время загрузки, появится предупреждение — скачивание не оборвётся случайно.</p></div></div>
+      <div class="news-item"><div class="dot"></div><div><b>Мелочи</b><p>Плашка версии переехала к логотипу, кнопки в светлой теме больше не тёмные, исправлена запись файла настроек.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="honest">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Честно о файле</div>
+      <h2>Безопасность и требования</h2>
+      <p>Всё, что можно проверить самостоятельно, — ниже. Хеш файла указан рядом с кнопкой скачивания.</p>
+    </div>
+    <div class="vsplit">
+      <div class="checks">
+        <div class="check"><div class="ok">✓</div><div><b>Пароль от Microsoft/Mojang не запрашивается</b><p>Вход только по оффлайн-нику, пароль никуда не передаётся.</p></div></div>
+        <div class="check"><div class="ok">✓</div><div><b>Данные остаются на вашем компьютере</b><p>Ники, настройки и миры хранятся локально.</p></div></div>
+        <div class="check"><div class="ok">✓</div><div><b>Нет майнеров и рекламных модулей</b><p>Сборка без сторонних сервисов и «партнёрских» установщиков.</p></div></div>
+        <div class="check"><div class="ok">!</div><div><b>Файл не подписан сертификатом</b><p>Проект инди, поэтому Windows может показывать предупреждение. Подлинность проверяйте по SHA256.</p></div></div>
+        <div class="check"><div class="ok">!</div><div><b>Скачивайте только с этой страницы</b><p>Файлы из сторонних «сборников лаунчеров» могли быть изменены.</p></div></div>
+      </div>
+      <div class="vcard">
+        <table class="table">
+          <thead><tr><th>Параметр</th><th>Минимум</th><th>Комфортно</th></tr></thead>
+          <tbody>
+            <tr><td>Windows</td><td>10 (64-бит)</td><td>10 или 11, 64-бит</td></tr>
+            <tr><td>Оперативная память</td><td>4 ГБ (игра — 2 ГБ)</td><td>8 ГБ+ (игра — 4 ГБ)</td></tr>
+            <tr><td>Место на диске</td><td>~1 ГБ</td><td>5 ГБ+ с модами и мирами</td></tr>
+            <tr><td>Java</td><td colspan="2">Отдельно ставить не нужно — лаунчер сам готовит окружение</td></tr>
+            <tr><td>Права администратора</td><td colspan="2">Не требуются</td></tr>
+          </tbody>
+        </table>
+        <p class="note">ОЗУ под игру выставляется в настройках. Для 1.16.5 достаточно 2–3 ГБ, для новых версий с модами — 4 ГБ и больше.</p>
+        <p class="note">SHA256: <span class="mono">75a3b8cd5d0768576e721a9432eeb9552252614d50610062e1277acb11af4307</span></p>
+        <p class="note"><a href="https://www.virustotal.com/gui/file/75a3b8cd5d0768576e721a9432eeb9552252614d50610062e1277acb11af4307" target="_blank" rel="noopener">Проверить на VirusTotal</a></p>
+      </div>
+    </div>
+  
+    <div class="vgrid2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
+      <div class="card"><h3>Версии игры</h3><p>Все релизы и снапшоты из официального списка Mojang — скачиваются по требованию.</p></div>
+      <div class="card"><h3>Загрузчики</h3><p>Forge, Fabric, NeoForge, OptiFine — да, все четыре.</p></div>
+      <div class="card"><h3>Моды и ресурспаки</h3><p>Поиск и установка через Modrinth прямо в окне лаунчера.</p></div>
+      <div class="card"><h3>Готовые сборки модпаков</h3><p>Нет — набор модов собираете сами.</p></div>
+      <div class="card"><h3>Аккаунт Microsoft / Mojang</h3><p>Нет — только оффлайн-ник.</p></div>
+      <div class="card"><h3>Linux и macOS</h3><p>Нет — только Windows 10/11 (64-бит).</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Вопросы</div>
+      <h2>Коротко о главном</h2>
+    </div>
+    <details>
+      <summary>Что такое MifeksPro?</summary>
+      <p>Авторский лаунчер Minecraft для Windows: выбор версии и загрузчика, поиск модов на Modrinth, список серверов и настройки в одном окне. Установка не нужна — один файл .exe.</p>
+    </details>
+    <details>
+      <summary>Нужна ли лицензия Minecraft?</summary>
+      <p>Нет. Лаунчер работает на оффлайн-нике и не требует аккаунта Microsoft. Обратная сторона: вход на серверы с проверкой лицензии недоступен.</p>
+    </details>
+    <details>
+      <summary>Это безопасно?</summary>
+      <p>Пароль от аккаунта лаунчер не запрашивает, данные хранятся локально. Файл можно проверить по SHA256 из блока загрузки или открыть на VirusTotal.</p>
+    </details>
+    <details>
+      <summary>Почему антивирус ругается?</summary>
+      <p>Файл не подписан цифровым сертификатом, а SmartScreen не любит новые .exe без подписи — отсюда «Не удалось проверить издателя». Сверьте SHA256 с хешем на странице: если совпадает, файл тот же, что загрузил автор.</p>
+    </details>
+    <details>
+      <summary>Где хранятся миры и настройки?</summary>
+      <p>На вашем компьютере, в папке лаунчера рядом с игровыми файлами. Перед обновлением и экспериментами с модами делайте копию папки мира.</p>
+    </details>
+    <details>
+      <summary>Как удалить лаунчер полностью?</summary>
+      <p>Удалите файл mifekspro.exe и папку лаунчера с версиями, настройками и мирами. Отдельного деинсталлятора нет, в реестр лаунчер ничего не пишет.</p>
+    </details>
+    <details>
+      <summary>Есть версия для Linux, macOS или Android?</summary>
+      <p>Для Linux и macOS нет — только Windows 10/11. Мобильная версия для Android проходит закрытое тестирование: заявка и APK — на странице <a href="beta.html">ЗБТ mobile</a>.</p>
+    </details>
+    <details>
+      <summary>Какая сейчас версия и что в ней нового?</summary>
+      <p>Актуальная версия — 1.6, статус бета. Список изменений — в разделе «Что нового», хеш файла — рядом с кнопкой скачивания.</p>
+    </details>
+    <details>
+      <summary>Скачивание не началось — что делать?</summary>
+      <p>Обновите страницу и нажмите кнопку ещё раз. Если браузер блокирует загрузку .exe, разрешите её вручную. Резервная ссылка — в блоке загрузки.</p>
+    </details>
+  </div>
+</section>
+
+<section id="portable">
+  <div class="wrap">
+    <span class="eyebrow">Портативные сборки</span>
+    <h2>Скачал архив — играешь сразу</h2>
+    <p class="lead">Внутри архива уже лежат Java 25, Minecraft 26.3 и моды. Ставить ничего не нужно: распаковал папку, запустил exe.</p>
+    <div class="bbgrid">
+      <div class="card">
+        <div class="ico">▣</div>
+        <h3>mifeks portable</h3>
+        <p class="note" style="margin:0 0 10px">213 МБ · лаунчер + Java 25 + Minecraft 26.3</p>
+        <p>Все вкладки лаунчера: версии, аккаунт, моды, чат и «Битва построек». Своя Java внутри, системная не нужна.</p>
+        <a class="btn btn-primary" href="https://github.com/mifeks/mifeks.github.io/releases/latest/download/mifekspro-portable.zip" download>Скачать ZIP</a>
+      </div>
+      <div class="card">
+        <div class="ico">✦</div>
+        <h3>Просто «Битва построек»</h3>
+        <p class="note" style="margin:0 0 10px">56 МБ · только режимы и код</p>
+        <p>Ничего лишнего: режимы, команда до 20 человек, темы и джойн-код BP-XXXX-XXXX-XXXX. Java 25 внутри архива.</p>
+        <a class="btn btn-primary" href="https://github.com/mifeks/mifeks.github.io/releases/latest/download/bitva-postroek-standalone.zip" download>Скачать ZIP</a>
+      </div>
+      <div class="card">
+        <div class="ico">☁</div>
+        <h3>Сервер битвы</h3>
+        <p class="note" style="margin:0 0 10px">182 МБ · Fabric 26.3 + мод + Java</p>
+        <p>Комнаты 50×50×65 из бедрока, пять режимов, защита стен. Запуск одним файлом ЗАПУСТИТЬ-СЕРВЕР.bat.</p>
+        <a class="btn btn-primary" href="https://github.com/mifeks/mifeks.github.io/releases/latest/download/bitva-postroek-server.zip" download>Скачать ZIP</a>
+      </div>
+    </div>
+    <p class="note">Все компьютеры в одной сети? Адрес для друзей — локальный IP и порт 25565, проброс портов не нужен.</p>
+    <style>
+      .bbgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:18px 0 14px}
+      .bbgrid .card{display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease}
+      .bbgrid .card:hover{transform:translateY(-3px);border-color:var(--line-2)}
+      .bbgrid .card h3{margin:0 0 6px;font-size:1.06rem}
+      .bbgrid .card p{color:var(--dim);font-size:.92rem;margin:0 0 16px}
+      .bbgrid .card .btn{margin-top:auto}
+      .bbgrid .ico{background:rgba(43,212,194,.12);border:1px solid rgba(43,212,194,.28);color:var(--accent);font-size:18px}
+    </style>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="dl">
+      <div class="eyebrow">Загрузка</div>
+      <h2>Скачать MifeksPro 1.6 для Windows</h2>
+      <p class="lead">Один файл, без установщика и регистрации. Хеш и ссылка для проверки — сразу под кнопкой.</p>
+      <div class="actions">
+        <a href="mifekspro.exe" class="btn btn-primary" download>Скачать MifeksPro 1.6 · 2,5 МБ</a>
+      </div>
+      <p class="note">mifekspro.exe · 2 638 848 байт · SHA256: <span class="mono">75a3b8cd5d0768576e721a9432eeb9552252614d50610062e1277acb11af4307</span></p>
+      <p class="note"><a href="https://www.virustotal.com/gui/file/75a3b8cd5d0768576e721a9432eeb9552252614d50610062e1277acb11af4307" target="_blank" rel="noopener">Проверить на VirusTotal</a> · <a href="#changelog">Что нового</a> · <a href="#install">Как установить</a> · обновлено 6 ноября 2026</p>
+      <div class="warn">Версия 1.6 — бета. Возможны ошибки и вылеты. Перед запуском сделайте резервную копию мира.</div>
+
+      <div class="archive">
+        <h3 style="margin-bottom:8px">Старые версии</h3>
+        <p class="note" style="margin-top:0">Прошлые сборки — без поддержки. Нужны, если новая версия на вашем ПК ведёт себя хуже.</p>
+        <table>
+          <tbody>
+            <tr><td>1.4 · бета</td><td>2 609 152 байта</td><td class="mono">6cdc222d…95f3a55</td><td><a href="archive/mifekspro-1.4.exe" download>скачать</a></td></tr>
+            <tr><td>1.5 · бета, сборка от 3 ноября</td><td>2 614 784 байта</td><td class="mono">e4f07c6e…88a4f8a</td><td><a href="archive/mifekspro-1.5-beta-0311.exe" download>скачать</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  <div class="foot">
-    <div>mifeks · лаунчер и «Битва построек» для Minecraft 26.3</div>
-    <div>сайт статический, <a href="#download">скачать</a> · без Google и внешних API</div>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="brand" style="margin-bottom:12px"><img src="img/logo.png" alt="" width="30" height="30">MIFEKSPRO</div>
+        <p>Авторский лаунчер Minecraft для Windows. Делается вручную: каждый релиз — это доработки, фиксы и обратная связь игроков. Никакой рекламы и слежки.</p>
+        <p style="margin-top:12px">Связь: <a href="mailto:miferpro@vk.com">miferpro@vk.com</a></p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <div class="flinks">
+          <a href="#features">Возможности</a>
+      <a href="#screens">Скриншоты</a>
+      <a href="#video">Видео</a>
+          <a href="#versions">Версии и серверы</a>
+          <a href="#install">Установка</a>
+          <a href="#changelog">Что нового</a>
+          <a href="#download">Скачать</a>
+        </div>
+      </div>
+      <div>
+        <h4>Ещё</h4>
+        <div class="flinks">
+          <a href="account.html">Аккаунт и кликер</a>
+          <a href="skins.html">Скины</a>
+          <a href="builder.html">Сборщик модов</a>
+          <a href="optimize.html">Оптимизация FPS</a>
+          <a href="beta.html">ЗБТ · Android</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 MifeksPro · 1.6 бета · файл не подписан сертификатом</span>
+      <span>Minecraft — товарный знак Mojang AB. Проект не связан с Mojang и Microsoft.</span>
+    </div>
   </div>
 </footer>
 
 <script>
-  var DOWNLOADS = {
-    portable:   "",
-    standalone: "",
-    server:     ""
-  };
-  document.querySelectorAll("a[data-dl]").forEach(function (a) {
-    var url = DOWNLOADS[a.getAttribute("data-dl")];
-    if (url) { a.href = url; a.removeAttribute("aria-disabled"); a.setAttribute("download", ""); }
-  });
+(function () {
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  var fill = document.getElementById('pbarFill');
+  if (fill) {
+    var upd = function () {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var p = max > 0 ? window.pageYOffset / max : 0;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      fill.style.width = (p * 100) + '%';
+    };
+    window.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    upd();
+  }
+})();
 </script>
 </body>
 </html>
