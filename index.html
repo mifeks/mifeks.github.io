@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0a0c11">
 <meta property="og:type" content="website">
 <meta property="og:title" content="mifeksPROlauncher 1.7 — лаунчер Minecraft и Прикс">
-<meta property="og:description" content="Лаунчер без установки и мессенджер Прикс: веб-версия в браузере, вход через Яндекс, свой сервер.">
+<meta property="og:description" content="Лаунчер без установки и мессенджер Прикс: веб-версия в браузере, вход через Яндекс, каналы и друзья.">
 <meta property="og:image" content="https://mifeks.github.io/img/screen-main.webp">
 <link rel="canonical" href="https://mifeks.github.io/">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -495,7 +495,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <div>
         <div class="kicker" style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Прикс</div>
         <h2>Мессенджер, который открывается в браузере</h2>
-        <p>Ник и пароль — или вход через Яндекс. Общий чат, личные сообщения и друзья. Отдельное приложение для Windows, веб-версия по кнопке и свой сервер на Node.js.</p>
+        <p>Ник и пароль — или вход через Яндекс. Общий чат, личные сообщения, друзья и каналы. Отдельное приложение для Windows и веб-версия по кнопке.</p>
         <div class="actions">
           <a class="btn primary" href="http://51.250.92.168:8777/?reg=1">
             <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
@@ -519,7 +519,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <div class="priks-list">
         <div class="priks-item">
           <span class="dotmark">1</span>
-          <div><b>Веб-версия по кнопке</b><span>Открывается в браузере без установки: общий чат, личные сообщения и друзья на своём сервере.</span></div>
+          <div><b>Веб-версия по кнопке</b><span>Открывается в браузере без установки: общий чат, личные сообщения, друзья и каналы.</span></div>
         </div>
         <div class="priks-item">
           <span class="dotmark">2</span>
@@ -527,7 +527,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
         </div>
         <div class="priks-item">
           <span class="dotmark">3</span>
-          <div><b>Свой сервер</b><span>Node.js без зависимостей: баны, друзья, анти-флуд. Запускается одной командой на виртуальной машине.</span></div>
+          <div><b>Каналы и поиск по номеру</b><span>Кнопка «+» ищет человека по нику или телефону, а канал создаётся в два клика.</span></div>
         </div>
       </div>
     </div>
@@ -571,7 +571,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <div class="step"><div class="num">3</div><b>Запустите</b><p>Если Windows покажет SmartScreen — «Подробнее» → «Выполнить в любом случае».</p></div>
       <div class="step"><div class="num">4</div><b>Выберите версию и загрузчик</b><p>Версия и ОЗУ выставляются в лаунчере, библиотеки скачиваются автоматически.</p></div>
       <div class="step"><div class="num">5</div><b>Введите ник и нажмите «Играть»</b><p>Оффлайн-ник сохраняется в списке — в следующий раз просто выбираете его.</p></div>
-      <div class="step"><div class="num">П</div><b>Попробуйте Прикс</b><p>Мессенджер открывается в браузере по кнопке — сервер подключается в один шаг.</p></div>
+      <div class="step"><div class="num">П</div><b>Попробуйте Прикс</b><p>Мессенджер открывается в браузере по кнопке — регистрация занимает минуту.</p></div>
     </div>
   </div>
 </section>
@@ -704,8 +704,8 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <details><summary>Это безопасно?</summary><div class="body">Пароль от аккаунта лаунчер не запрашивает, данные хранятся локально. Файл можно проверить по SHA256 из блока загрузки или открыть на VirusTotal.</div></details>
       <details><summary>Почему антивирус ругается?</summary><div class="body">Файл не подписан цифровым сертификатом, а SmartScreen не любит новые .exe без подписи — отсюда «Не удалось проверить издателя». Сверьте SHA256 с хешем на странице: если совпадает, файл тот же, что загрузил автор.</div></details>
       <details><summary>Где хранятся миры и настройки?</summary><div class="body">На вашем компьютере, в папке лаунчера рядом с игровыми файлами. Перед обновлением и экспериментами с модами делайте копию папки мира.</div></details>
-      <details><summary>Как открыть Прикс в браузере?</summary><div class="body">Кнопка «Открыть веб-версию» в разделе «Прикс» ведёт на клиент, который живёт на GitHub Pages. При первом запуске он спрашивает адрес сервера (например, http://89.169.x.x:8777) и запоминает его. Дальше — вход по нику или через Яндекс.</div></details>
-      <details><summary>Как подключить свой сервер Прикса?</summary><div class="body">На виртуальной машине с Node.js 20 запускается server.js: он слушает порт 8777 и раздаёт сам клиент. Инструкция и конфиг nginx — в репозитории Прикса, папка deploy.</div></details>
+<details><summary>Как открыть Прикс в браузере?</summary><div class="body">Нажмите «Открыть веб-версию» в разделе «Прикс» — клиент откроется сразу, без установки. Дальше войдите по нику и паролю или через Яндекс.</div></details>
+<details><summary>Можно ли поставить Прикс приложением?</summary><div class="body">Да: скачайте priks.exe кнопкой в разделе «Прикс» или добавьте веб-версию на рабочий стол средствами браузера — «Установить приложение» в меню страницы.</div></details>
       <details><summary>Есть версия для Linux, macOS или Android?</summary><div class="body">Для Linux и macOS лаунчера нет — только Windows 10/11. Веб-версия Прикса работает в браузере на любой системе.</div></details>
       <details><summary>Какая сейчас версия и что в ней нового?</summary><div class="body">Актуальная версия — 1.7, статус бета, выход из беты планируется в 2027 году. Список изменений — в разделе «Что нового», хеш файла — рядом с кнопкой скачивания.</div></details>
       <details><summary>Скачивание не началось — что делать?</summary><div class="body">Обновите страницу и нажмите кнопку ещё раз. Если браузер блокирует загрузку .exe, разрешите её вручную. Резервная ссылка — в блоке загрузки.</div></details>
