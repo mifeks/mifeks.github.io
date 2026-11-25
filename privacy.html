@@ -1,105 +1,271 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Политика конфиденциальности — MifeksPro</title>
-<meta name="description" content="Какие данные собирает лаунчер MifeksPro, сайт mifekspro.website.yandexcloud.net и мобильная версия чата: состав данных, хранение, удаление.">
-<meta name="theme-color" content="#070a0d">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Политика конфиденциальности — MifeksPro и Прикс</title>
+<meta name="description" content="Какие данные собирают лаунчер MifeksPro и мессенджер Прикс, где они хранятся, кто имеет доступ и как удалить аккаунт.">
+<meta name="theme-color" content="#0a0c11">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="icon" type="image/png" sizes="120x120" href="favicon-120.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://mifeks.github.io/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
 <style>
-:root{--ink-950:#070a0d;--mist-100:#f2f5f9;--mist-300:#c3ccd8;--mist-500:#8b97a8;--aqua-300:#6ee8d9}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--ink-950);color:var(--mist-300);line-height:1.7;padding:48px 20px 80px}
-.wrap{max-width:760px;margin:0 auto}
-a{color:var(--aqua-300);text-decoration:none;border-bottom:1px solid rgba(110,232,217,.35)}
-a:hover{color:#fff}
-.back{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;color:var(--mist-500);border:none;margin-bottom:28px}
-.back:hover{color:var(--mist-100)}
-h1{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;color:var(--mist-100);margin-bottom:10px}
-.upd{font-size:.85rem;color:var(--mist-500);margin-bottom:34px}
-h2{font-size:1.15rem;color:var(--mist-100);margin:34px 0 10px}
-p{margin-bottom:12px}
-ul{margin:0 0 12px 22px}
-li{margin-bottom:6px}
-.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px 20px;margin:18px 0}
-.card b{color:var(--mist-100)}
-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0 12px}
-td,th{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:left;vertical-align:top}
-th{color:var(--mist-100);font-weight:600}
-tr:last-child td{border-bottom:none}
-.mono{font-family:ui-monospace,Consolas,monospace;font-size:.85rem}
-.muted{font-size:.88rem;color:var(--mist-500);margin-top:40px;border-top:1px solid rgba(255,255,255,.07);padding-top:18px}
+:root{
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --display:'Playfair Display',Georgia,serif;
+  --accent:#c9a05c;
+  --accent-2:#e0c08a;
+  --accent-ink:#1a1408;
+  --r:16px;
+  --r-lg:24px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+html[data-theme="dark"]{
+  --bg:#0a0c11;--panel:rgba(255,255,255,.045);--panel-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09);--line-2:rgba(255,255,255,.16);--text:#eef1f6;--muted:#98a1b0;
+  --shadow:0 18px 50px rgba(0,0,0,.45);--hero-glow:rgba(201,160,92,.22);
+}
+html[data-theme="light"]{
+  --bg:#f5f3ef;--panel:#ffffff;--panel-2:#f7f5f1;--line:rgba(28,30,34,.10);--line-2:rgba(28,30,34,.18);
+  --text:#1b1d22;--muted:#767d8a;--shadow:0 18px 44px rgba(26,24,20,.10);--hero-glow:rgba(201,160,92,.20);
+  --accent-ink:#fffaf0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s var(--ease),color .35s var(--ease)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0;line-height:1.15}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+.wrap{width:min(880px,100%);margin:0 auto;padding:0 24px}
+.muted{color:var(--muted)}
+
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg::before{content:"";position:absolute;inset:-20% -10%;
+  background:radial-gradient(52% 44% at 18% 8%,var(--hero-glow),transparent 62%),
+             radial-gradient(46% 40% at 88% 12%,rgba(120,140,255,.14),transparent 60%),
+             radial-gradient(40% 46% at 62% 92%,rgba(43,212,194,.10),transparent 62%);
+  filter:blur(6px)}
+.bg .grid{position:absolute;inset:0;opacity:.3;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(70% 60% at 50% 0%,#000 45%,transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 0%,#000 45%,transparent 100%)}
+
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:14px;height:66px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.02rem}
+.tile{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto;
+  background:linear-gradient(140deg,var(--accent-2),var(--accent));color:var(--accent-ink);
+  font-family:var(--display);font-weight:700;font-size:1rem;
+  box-shadow:0 8px 22px -8px rgba(201,160,92,.7)}
+.hact{margin-left:auto;display:flex;align-items:center;gap:10px}
+.iconbtn{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+  background:var(--panel);border:1px solid var(--line);color:var(--muted);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s}
+.iconbtn:hover{color:var(--text);border-color:var(--line-2)}
+svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:inherit;font-weight:600;
+  font-size:.9rem;padding:9px 16px;border-radius:11px;border:1px solid transparent;cursor:pointer;
+  transition:transform .18s var(--ease),background .2s,border-color .2s}
+.btn.ghost{background:var(--panel);border-color:var(--line);color:var(--text)}
+.btn.ghost:hover{background:var(--panel-2);border-color:var(--line-2)}
+.ya-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;
+  background:#fc3f1d;color:#fff;font-weight:800;font-size:.72rem;flex:0 0 auto}
+
+main{padding:54px 0 30px}
+.crumbs{font-size:.84rem;color:var(--muted);margin-bottom:18px}
+.crumbs a:hover{color:var(--text)}
+h1{font-size:clamp(1.9rem,4vw,2.8rem)}
+.sub{color:var(--muted);font-size:.9rem;margin-top:12px}
+.lead{font-size:1.05rem;margin-top:22px;color:var(--text)}
+
+.tldr{margin-top:26px;padding:20px 22px;border-radius:var(--r);background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--accent)}
+.tldr b{font-family:var(--display);font-size:1.05rem}
+.tldr p{color:var(--muted);margin-top:8px;font-size:.94rem}
+
+h2{font-size:1.35rem;margin-top:44px;padding-top:26px;border-top:1px solid var(--line)}
+h3{font-size:1.02rem;font-family:var(--font);font-weight:700;margin-top:22px}
+p,li{font-size:.95rem;margin-top:12px;color:var(--text)}
+.muted-p{color:var(--muted)}
+ul.bullets li{position:relative;padding-left:18px;color:var(--muted);font-size:.94rem}
+ul.bullets li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);opacity:.7}
+table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{color:var(--text);font-weight:500}
+td.muted-cell{color:var(--muted)}
+
+.note{margin-top:16px;padding:16px 18px;border-radius:14px;background:var(--panel);
+  border:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.note b{color:var(--text)}
+
+footer{border-top:1px solid var(--line);padding:26px 0 40px;margin-top:34px}
+.frow{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.frow a:hover{color:var(--text)}
+@media (max-width:700px){
+  main{padding:34px 0 20px}
+  .hrow{height:60px}
+  .btn.ghost .lbl{display:none}
+  h2{margin-top:34px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← Вернуться на сайт</a>
-  <h1>Политика конфиденциальности</h1>
-  <p class="upd">Лаунчер MifeksPro 1.6, мобильная версия чата и сайт mifekspro.website.yandexcloud.net · обновлено 6 ноября 2026</p>
 
-  <div class="card">
-    <b>Коротко:</b> настольный лаунчер не собирает персональные данные, пока вы не включите чат. Для чата нужны ник и пароль — других полей нет: почта и телефон не запрашиваются. Всё остальное (настройки, версии, миры) лежит только на вашем компьютере.
+<div class="bg" aria-hidden="true"><span class="grid"></span></div>
+
+<header>
+  <div class="wrap hrow">
+    <a class="brand" href="/"><span class="tile">M</span>MifeksPro</a>
+    <div class="hact">
+      <button class="iconbtn" id="themeBtn" title="Сменить тему" aria-label="Сменить тему">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+      </button>
+      <a class="btn ghost" href="http://51.250.92.168:8777/?yandex=1"><span class="ya-mark">Я</span><span class="lbl">Войти через Яндекс</span></a>
+    </div>
   </div>
+</header>
 
-  <h2>Настольный лаунчер</h2>
-  <ul>
-    <li>Регистрации, аккаунта и входа по паролю нет — используется оффлайн-ник, который вы вводите сами.</li>
-    <li>Пароль от Minecraft/Microsoft лаунчер не запрашивает и не хранит.</li>
-    <li>Ник, настройки, версии игры, миры и моды хранятся локально, в папке лаунчера на вашем компьютере.</li>
-    <li>Аналитика, трекеры и телеметрия не используются.</li>
-  </ul>
+<main>
+  <div class="wrap">
+    <div class="crumbs"><a href="/">← Вернуться на сайт</a></div>
+    <h1>Политика конфиденциальности</h1>
+    <p class="sub">Лаунчер MifeksPro, мессенджер Прикс и сайт mifeks.github.io · обновлено 25 ноября 2026</p>
 
-  <h2>Чат в лаунчере и на сайте</h2>
-  <p>Чат — единственная часть проекта, которой нужен аккаунт. При первом входе вы придумываете ник и пароль; больше ничего не спрашивается. По этим данным создаётся запись в <span class="mono">users/&lt;uid&gt;</span> базы Firebase Realtime Database:</p>
-  <table>
-    <tr><th>Что</th><th>Зачем</th></tr>
-    <tr><td>Ник</td><td>Чтобы вас находили по поиску и подписывали сообщения</td></tr>
-    <tr><td>Пароль</td><td>Вход в чат. Хранится не в открытом виде, а хешем в Firebase Authentication</td></tr>
-    <tr><td>Список друзей</td><td>Общий список для лаунчера и сайта — заявки и принятые связи</td></tr>
-    <tr><td>Сообщения</td><td>Общий чат и личные переписки, чтобы их видел собеседник на другом устройстве</td></tr>
-    <tr><td>Дата регистрации и последнего входа</td><td>Показывать, кто давно не заходил, и чистить брошенные ники</td></tr>
-  </table>
-  <p>Почта, телефон, имя и адрес не запрашиваются и не хранятся. Пароль нужен только для чата: к игре, к Mojang и к Microsoft он отношения не имеет.</p>
+    <p class="lead">Документ описывает, какие данные собирает проект MifeksPro и как с ними обращаются. Он составлен так, чтобы всё можно было проверить: лаунчер не требует аккаунта, а для мессенджера Прикс данные лежат на собственном сервере в России.</p>
 
-  <h2>Где хранятся данные и кто имеет доступ</h2>
-  <ul>
-    <li>Аккаунты, друзья и сообщения — в Firebase Realtime Database (серверы Google за пределами Российской Федерации).</li>
-    <li>Сайт и файл лаунчера лежат в Яндекс Облаке (дата-центры в России), у провайдера остаются стандартные журналы обращений: IP-адрес, тип браузера, время запроса.</li>
-    <li>Доступ к базе и почте проекта — только у автора лаунчера.</li>
-    <li>Собственных счётчиков, рекламных трекеров и телеметрии нет ни на сайте, ни в лаунчере.</li>
-  </ul>
-  <div class="card">
-    <b>Важно по 152-ФЗ:</b> персональные данные граждан РФ по закону должны храниться в базах на территории России, а чат работает через Firebase (Google). Если для вас это критично — не регистрируйтесь в чате, остальные функции лаунчера работают без аккаунта. Удаление записи — по первому запросу.</div>
+    <div class="tldr">
+      <b>Коротко</b>
+      <p>Лаунчер работает без регистрации: ники, настройки и миры остаются на вашем компьютере. Мессенджеру Прикс нужен аккаунт — ник и пароль либо вход через Яндекс. Из Яндекса приходит только идентификатор, логин, имя и аватар; пароль от Яндекса к нам не попадает. Сообщения и профиль хранятся на нашем сервере в Яндекс.Облаке на территории России. Почту и телефон мы не спрашиваем. Удаление аккаунта — по запросу на почту проекта.</p>
+    </div>
 
+    <h2>1. Кто обрабатывает данные</h2>
+    <p>Проект MifeksPro — независимый (инди) проект одного автора. Обработка данных ведётся для работы сайта, лаунчера и мессенджера Прикс. Связаться: <a href="mailto:miferpro@vk.com">miferpro@vk.com</a>.</p>
 
-  <h2>Сроки хранения и удаление</h2>
-  <p>Запись в чате хранится, пока вы ею пользуетесь. Удаление — по первому запросу: напишите на <a href="mailto:miferpro@vk.com">miferpro@vk.com</a> и укажите свой ник. Аккаунт, друзья и личные сообщения удаляются в течение 7 дней, после этого вход под этим ником перестаёт работать, а ник освобождается.</p>
+    <h2>2. Лаунчер MifeksPro</h2>
+    <p>Лаунчер не создаёт аккаунт и не отправляет на серверы проекта персональные данные.</p>
+    <ul class="bullets">
+      <li>Вход — по оффлайн-нику, который вы вводите сами. Пароль от Minecraft или Microsoft лаунчер не запрашивает.</li>
+      <li>Ники, настройки, версии игры, миры и моды хранятся локально, в папке лаунчера на вашем компьютере.</li>
+      <li>Аналитики, трекеров и телеметрии нет.</li>
+      <li>Сеть используется только для работы игры: загрузка файлов с официальных серверов Mojang, поиск и скачивание модов и ресурспаков с Modrinth, проверка доступности серверов из встроенного списка.</li>
+      <li>Встроенный чат лаунчера работает через мессенджер Прикс — правила для него ниже.</li>
+    </ul>
 
-  <h2>Сетевые запросы лаунчера</h2>
-  <p>Лаунчер обращается в интернет только для того, чтобы игра работала:</p>
-  <ul>
-    <li>загрузка файлов игры и библиотек с официальных серверов Mojang;</li>
-    <li>загрузка выбранных вами модов и ресурспаков с Modrinth;</li>
-    <li>проверка доступности серверов из встроенного списка.</li>
-  </ul>
+    <h2>3. Мессенджер Прикс</h2>
+    <p>Прикс — отдельный сервис: веб-версия в браузере и приложение для Windows. Аккаунт нужен, чтобы писать в общий чат и в личные сообщения.</p>
 
-  <h2>Скачивание файлов</h2>
-  <p>Контрольная сумма SHA256 опубликована рядом с кнопкой скачивания — файл можно проверить на VirusTotal, не запуская его. В лаунчере нет рекламы и встроенных покупок.</p>
+    <h3>Способы входа</h3>
+    <ul class="bullets">
+      <li><b>Ник и пароль.</b> При регистрации вы придумываете ник, отображаемое имя и пароль. Больше ничего не спрашивается: ни почта, ни телефон.</li>
+      <li><b>Яндекс ID.</b> Кнопка «Войти через Яндекс» уводит на страницу Яндекса, где вы подтверждаете доступ. Пароль от аккаунта Яндекса вводится на стороне Яндекса и нам не передаётся.</li>
+    </ul>
 
-  <h2>Дети</h2>
-  <p>В лаунчере и на сайте нет рекламы и покупок. Регистрироваться в чате может только пользователь, достигший возраста, с которого самостоятельно распоряжается своими персональными данными; иначе — с согласия родителя.</p>
+    <h3>Что мы получаем от Яндекса</h3>
+    <p>После подтверждения Яндекс возвращает: числовой идентификатор пользователя,, логин, отображаемое имя и, если он открыт, адрес аватара. Эти данные нужны, чтобы находить ваш аккаунт при следующем входе и показывать имя в чате. Почту из профиля Яндекса мы не запрашиваем и не храним.</p>
 
-  <h2>Изменения</h2>
-  <p>Если в проекте появится что-то новое, что работает с данными, эта страница будет обновлена до выхода такой версии.</p>
+    <h3>Что хранится на сервере Прикса</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Данные</th><th>Зачем</th></tr></thead>
+        <tbody>
+          <tr><td>Ник</td><td class="muted-cell">Чтобы вас находили поиском и подписывали сообщения</td></tr>
+          <tr><td>Отображаемое имя, аватар, статус</td><td class="muted-cell">Оформление профиля в чате</td></tr>
+          <tr><td>Пароль</td><td class="muted-cell">Только для входа. Хранится не в открытом виде, а хешем с солью</td></tr>
+          <tr><td>Идентификатор Яндекса и логин</td><td class="muted-cell">Только если вы входили через Яндекс — чтобы узнавать аккаунт</td></tr>
+          <tr><td>Список друзей</td><td class="muted-cell">Заявки в друзья и принятые связи</td></tr>
+          <tr><td>Сообщения</td><td class="muted-cell">Общий чат и личные переписки — чтобы собеседник их видел</td></tr>
+          <tr><td>Дата регистрации и последнего входа</td><td class="muted-cell">Показывать «в сети» и чистить брошенные ники</td></tr>
+          <tr><td>Технический журнал</td><td class="muted-cell">IP-адрес и время запроса — только для защиты от флуда и разбора сбоев</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted-p">Почта, телефон, адрес, паспортные данные и платёжные сведения не запрашиваются и не хранятся.</p>
 
-  <h2>Связь</h2>
-  <p>Вопросы по данным и приватности: <a href="mailto:miferpro@vk.com">miferpro@vk.com</a>.</p>
+    <h2>4. Где хранятся данные</h2>
+    <ul class="bullets">
+      <li>Профиль, друзья и сообщения Прикса — на виртуальной машине в <b>Яндекс.Облаке</b>, дата-центры на территории Российской Федерации (зона ru-central1).</li>
+      <li>Сайт и файлы для скачивания — на GitHub Pages и в Яндекс.Облаке; у провайдера остаются стандартные журналы обращений: IP-адрес, тип браузера, время запроса.</li>
+      <li>Доступ к серверу и почте проекта есть только у автора.</li>
+      <li>Рекламных счётчиков, пикселей и сторонней аналитики нет ни на сайте, ни в клиентах.</li>
+    </ul>
 
-  <p class="muted">MifeksPro — авторский проект, не связан с Mojang Studios и Microsoft. Minecraft — торговая марка Mojang AB; права принадлежат правообладателям.</p>
-</div>
+    <div class="note">
+      <b>152-ФЗ.</b> Персональные данные граждан РФ обрабатываются в базах на территории России — сервер Прикса размещён в Яндекс.Облаке (ru-central1). Вход через Яндекс означает передачу идентификатора и имени из вашего профиля Яндекса; правовые основания — ваше согласие, выраженное нажатием кнопки входа.
+    </div>
+
+    <h2>5. Cookies и локальное хранилище</h2>
+    <p>Своих рекламных cookies проект не ставит. В браузере сохраняется только техническое:</p>
+    <ul class="bullets">
+      <li>токен сессии, чтобы не входить заново при каждом обновлении страницы;</li>
+      <li>адрес сервера, если вы подключились к своему;</li>
+      <li>выбранная тема оформления.</li>
+    </ul>
+    <p>Это данные в localStorage вашего браузера; их можно удалить в настройках браузера в любой момент.</p>
+
+    <h2>6. Сроки хранения и удаление</h2>
+    <p>Аккаунт и сообщения хранятся, пока вы ими пользуетесь. Удаление — по запросу: напишите на <a href="mailto:miferpro@vk.com">miferpro@vk.com</a> и укажите ник. Аккаунт, друзья и личные сообщения удаляются в течение 7 дней, после этого вход под этим ником перестаёт работать, а ник освобождается.</p>
+    <p>Отвязать Яндекс можно отдельно: после этого вход через Яндекс для вашего аккаунта перестаёт работать, а вход по паролю, если он был задан, остаётся.</p>
+
+    <h2>7. Ваши права</h2>
+    <ul class="bullets">
+      <li>Узнать, какие данные о вас хранятся, и получить их копию.</li>
+      <li>Исправить ник, отображаемое имя, аватар и статус — в настройках профиля.</li>
+      <li>Удалить аккаунт и связанные сообщения по запросу.</li>
+      <li>Отозвать согласие на обработку, удалив аккаунт.</li>
+    </ul>
+    <p>Запросы обрабатываются в течение 7 рабочих дней по адресу <a href="mailto:miferpro@vk.com">miferpro@vk.com</a>.</p>
+
+    <h2>8. Дети</h2>
+    <p>Сервис не предназначен для детей младше 13 лет. Если вы родитель и считаете, что ребёнок создал аккаунт, напишите нам — удалим запись.</p>
+
+    <h2>9. Сторонние сервисы</h2>
+    <ul class="bullets">
+      <li><b>Яндекс ID</b> (oauth.yandex.ru, login.yandex.ru) — если вы выбрали вход через Яндекс. У Яндекса действует своя политика конфиденциальности.</li>
+      <li><b>GitHub Pages</b> — хостинг сайта. Журналы обращений остаются у GitHub.</li>
+      <li><b>Mojang и Modrinth</b> — источники файлов игры и модов для лаунчера.</li>
+      <li><b>Яндекс.Облако</b> — хостинг сервера мессенджера.</li>
+    </ul>
+
+    <h2>10. Изменения политики</h2>
+    <p>Актуальная версия всегда лежит на этой странице. При существенных изменениях дата в начале документа обновляется. Продолжая пользоваться сервисом после изменений, вы принимаете новую редакцию.</p>
+
+    <div class="note" style="margin-top:28px">
+      <b>Обратная связь.</b> Вопросы по данным и удалению аккаунта — <a href="mailto:miferpro@vk.com">miferpro@vk.com</a>, сообщения об ошибках — <a href="https://github.com/mifeks/mifeks.github.io/issues/new">в трекер проекта</a>.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap frow">
+    <span>© 2026 MifeksPro · Прикс</span>
+    <span><a href="/">Главная</a> · <a href="http://51.250.92.168:8777/">Веб-версия Прикса</a> · <a href="mailto:miferpro@vk.com">miferpro@vk.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem("mf.theme"); } catch (e) {}
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  var btn = document.getElementById("themeBtn");
+  if (btn) btn.addEventListener("click", function(){
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("mf.theme", next); } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>
