@@ -129,6 +129,11 @@ svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .btn.ghost:hover{background:var(--panel-2);border-color:var(--line-2)}
 .btn.sm{padding:9px 15px;font-size:.87rem}
 .ya-mark{
+  display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;
+  background:#fc3f1d;color:#fff;font-weight:800;font-size:.72rem;flex:0 0 auto;
+}
+.ya-login{gap:8px}
+.ya-mark{
   display:inline-grid;place-items:center;width:21px;height:21px;border-radius:6px;
   background:#fc3f1d;color:#fff;font-weight:800;font-size:.74rem;flex:0 0 auto;
 }
@@ -312,6 +317,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
 }
 @media (max-width:700px){
   nav.main{display:none}
+  .ya-login .lbl{display:none}
   .hero{padding:44px 0 30px}
   .cards,.dl,.steps,.srv-grid,.shots{grid-template-columns:1fr}
   section{padding:44px 0}
@@ -350,6 +356,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
       <button class="iconbtn" id="themeBtn" title="Сменить тему" aria-label="Сменить тему">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
       </button>
+      <a class="btn ghost sm ya-login" href="http://51.250.92.168:8777/?yandex=1"><span class="ya-mark">Я</span><span class="lbl">Войти через Яндекс</span></a>
       <a class="btn primary sm" href="#download">Скачать</a>
     </div>
   </div>
